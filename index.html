@@ -64,7 +64,7 @@
         header {
             position: fixed;
             width: 100%;
-            background: #f4ede3;
+            background: #eee6db;
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             z-index: 1000;
@@ -580,16 +580,41 @@
             transition: all 0.3s;
         }
 
-        .contact-item:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-5px);
+        .contact-link {
+            text-decoration: none;
+            color: white;
+            display: block;
+            cursor: pointer;
         }
 
-        .contact-item h3 {
+        .contact-link:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-link h3 {
             font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
             font-weight: 500;
             margin-bottom: 1rem;
             letter-spacing: 1px;
+        }
+
+        .contact-link p {
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover p {
+            transform: scale(1.05);
+        }
+
+        .contact-link:hover i {
+            transform: scale(1.2);
+            display: inline-block;
+        }
+
+        .contact-link i {
+            transition: all 0.3s;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -947,6 +972,15 @@
             color: white;
             text-align: center;
             padding: 2rem;
+        }
+
+        footer a:hover {
+            color: white !important;
+            text-decoration: underline !important;
+        }
+
+        footer i {
+            margin: 0 0.3rem;
         }
 
         /* Animaciones */
@@ -1418,26 +1452,24 @@
 
             <div class="booking-platforms">
                 <a href="#" class="platform-link">Airbnb</a>
-                <a href="#" class="platform-link">Booking.com</a>
-                <a href="#" class="platform-link">Expedia</a>
-                <a href="#" class="platform-link">Google</a>
+                <a target="_blank" href="https://www.booking.com/Share-0yqNGh" class="platform-link">Booking.com</a>
             </div>
 
             <div class="contact-info">
-                <div class="contact-item">
+                <a href="tel:+542966569953" class="contact-item contact-link">
                     <h3><i class="fas fa-phone"></i> Teléfono</h3>
                     <p>+54 2966 569953</p>
-                </div>
+                </a>
 
-                <div class="contact-item">
+                <a href="mailto:terminalsuitesrelcalafate@gmail.com" class="contact-item contact-link">
                     <h3><i class="fas fa-envelope"></i> Email</h3>
                     <p>terminalsuitesrelcalafate@gmail.com</p>
-                </div>
+                </a>
 
-                <div class="contact-item">
+                <a href="https://www.instagram.com/terminalsuites/" target="_blank" rel="noopener noreferrer" class="contact-item contact-link">
                     <h3><i class="fab fa-instagram"></i> Instagram</h3>
                     <p>@terminalsuites</p>
-                </div>
+                </a>
             </div>
 
             <p style="margin-top: 2rem; font-size: 1.1rem;">
@@ -1448,8 +1480,14 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Terminal Suites - El Calafate, Patagonia Argentina</p>
-        <p style="margin-top: 0.5rem;">Enrique Amado 235 | +54 2966 569953</p>
+        <p>&copy; 2025 Terminal Suites - El Calafate, Patagonia Argentina</p> <br>
+        <p style="font-size: 0.9rem; opacity: 0.9;">
+            <i class="fas fa-code"></i> Sitio web diseñado y desarrollado por
+            <a href="https://teocicciari.com.ar" target="_blank" rel="noopener noreferrer" style="color: #f4ede3; text-decoration: none; font-weight: 500; transition: all 0.3s;">
+                Teo Cicciari
+            </a>
+            <i class="fas fa-laptop-code" style="margin-left: 0.3rem;"></i>
+        </p>
     </footer>
 
     <script>
@@ -1482,16 +1520,6 @@
                     });
                 }
             });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.padding = '0.5rem 5%';
-            } else {
-                header.style.padding = '1rem 5%';
-            }
         });
 
         // Carrusel de Imágenes
