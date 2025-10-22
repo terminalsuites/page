@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Suites - El Calafate, Patagonia Argentina</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Tipografía Houschka Rounded - Todas las variantes */
+        @font-face {
+            font-family: 'Houschka Rounded';
+            src: url('fonts/fonnts.com-Houschka_Rounded_Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Houschka Rounded';
+            src: url('fonts/fonnts.com-Houschka_Rounded_Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Houschka Rounded';
+            src: url('fonts/fonnts.com-Houschka_Rounded_Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Houschka Rounded';
+            src: url('fonts/fonnts.com-Houschka_Rounded_Bold_Italic.otf') format('opentype');
+            font-weight: 700;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Houschka Rounded', 'Montserrat', 'Open Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #3f3f3f;
+            overflow-x: hidden;
+        }
+
+        /* Header y Navegación */
+        header {
+            position: fixed;
+            width: 100%;
+            background: #f4ede3;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #283b4f;
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #3f3f3f;
+            font-family: 'Houschka Rounded', 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #283b4f;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #283b4f;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Burger Menu */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .burger-menu span {
+            width: 28px;
+            height: 3px;
+            background: #283b4f;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .burger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), 
+                        url('img/estacionamiento.webp') no-repeat center center/cover;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+            margin-top: 15vh;
+        }
+
+        .hero h1 {
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: #283b4f;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(40,59,79,0.4);
+        }
+
+        .cta-button:hover {
+            background: #1e2a3a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(40,59,79,0.6);
+        }
+
+        /* Secciones */
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #283b4f;
+            margin-bottom: 3rem;
+            position: relative;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: #283b4f;
+            margin: 1rem auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            height: 400px;
+            background: linear-gradient(135deg, #283b4f 0%, #bab3ae 100%);
+            border-radius: 0 35px 0 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0 35px 0 0;
+        }
+
+        /* Ubicación */
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .location-features {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .location-item {
+            padding: 1.5rem;
+            background: #f4ede3;
+            border-radius: 0 25px 0 0;
+            border-left: 4px solid #283b4f;
+            transition: all 0.3s;
+        }
+
+        .location-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .location-item h3 {
+            color: #283b4f;
+            margin-bottom: 0.5rem;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .map-placeholder {
+            height: 500px;
+            background: linear-gradient(135deg, #f4ede3 0%, #bab3ae 100%);
+            border-radius: 0 35px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #283b4f;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .map-placeholder iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 0 35px 0 0;
+        }
+
+        /* Apartamentos */
+        .apartments-section {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Carrusel de imágenes */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 3rem auto;
+            overflow: hidden;
+            border-radius: 0 40px 0 0;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 600px;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(40,59,79,0.95) 0%, rgba(40,59,79,0.7) 70%, transparent 100%);
+            color: white;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .carousel-caption h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Houschka Rounded', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .carousel-caption p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Controles del carrusel */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            color: #283b4f;
+            border: none;
+            width: 35px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: #283b4f;
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev {
+            left: 1rem;
+            border-radius: 25px 0 0 25px;
+        }
+
+        .carousel-btn.next {
+            right: 1rem;
+            border-radius: 0 25px 25px 0;
+        }
+
+        .prev i {
+            padding-left: 5px;
+        }
+
+        .next i {
+            padding-right: 5px;
+        }
+
+        /* Indicadores */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .indicator.active {
+            background: white;
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        /* Grid de características */
+        .apartments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .apartment-card {
+            background: white;
+            border-radius: 0 30px 0 0;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .apartment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+
+        .apartment-image {
+            height: 250px;
+            background: linear-gradient(135deg, #283b4f 0%, #bab3ae 100%);
+        }
+
+        .apartment-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .apartment-content {
+            padding: 2rem;
+        }
+
+        .apartment-content h3 {
+            color: #283b4f;
+            margin-bottom: 1rem;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .amenities-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .amenities-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .amenities-list li::before {
+            content: '✓ ';
+            color: #283b4f;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Actividades */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .activity-card {
+            text-align: center;
+            padding: 2rem;
+            background: #f4ede3;
+            border-radius: 0 25px 0 0;
+            transition: all 0.3s;
+        }
+
+        .activity-card h3 {
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .activity-card:hover {
+            background: #283b4f;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .activity-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contacto */
+        .contact-section {
+            background: linear-gradient(135deg, #283b4f 0%, #bab3ae 100%);
+            color: white;
+            border-radius: 0 40px 0 0;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 0 25px 0 0;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .contact-item h3 {
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+        }
+
+        /* Servicios Incluidos */
+        .services-included {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #283b4f 0%, #bab3ae 100%);
+            border-radius: 0 40px 0 0;
+            color: white;
+        }
+
+        .services-included h3 {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 0 20px 0 0;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            align-content: center;
+        }
+
+        .service-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-item i {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: block;
+            color: #fff;
+        }
+
+        .service-item p {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* Formulario de Reserva */
+        .reservation-form {
+            max-width: 700px;
+            margin: 3rem auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 0 40px 0 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #283b4f;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #bab3ae;
+            border-radius: 0 20px 0 0;
+            font-family: 'Houschka Rounded', 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+            color: #3f3f3f;
+        }
+
+        .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: #283b4f;
+            box-shadow: 0 0 0 3px rgba(40, 59, 79, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Date Picker Personalizado */
+        .date-picker-container {
+            position: relative;
+        }
+
+        .date-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #bab3ae;
+            border-radius: 0 20px 0 0;
+            font-family: 'Houschka Rounded', 'Montserrat', sans-serif;
+            font-size: 1rem;
+            background: white;
+            color: #3f3f3f;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
+
+        .date-input:hover {
+            border-color: #283b4f;
+        }
+
+        .date-input.active {
+            border-color: #283b4f;
+            box-shadow: 0 0 0 3px rgba(40, 59, 79, 0.1);
+        }
+
+        .date-input i {
+            color: #283b4f;
+        }
+
+        .calendar-dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 0 20px 0 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            z-index: 100;
+            display: none;
+        }
+
+        .calendar-dropdown.active {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+        }
+
+        .calendar-header button {
+            background: none;
+            border: none;
+            color: #283b4f;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: all 0.3s;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-header button:hover {
+            background: #f4ede3;
+        }
+
+        .calendar-header span {
+            font-weight: 500;
+            color: #283b4f;
+            font-size: 1rem;
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .calendar-weekday {
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #283b4f;
+            padding: 0.5rem;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.3rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            border: none;
+            background: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #3f3f3f;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-day:hover:not(.disabled):not(.selected) {
+            background: #f4ede3;
+        }
+
+        .calendar-day.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.selected {
+            background: #283b4f;
+            color: white;
+            font-weight: 600;
+        }
+
+        .calendar-day.in-range {
+            background: rgba(40, 59, 79, 0.1);
+        }
+
+        .calendar-day.empty {
+            cursor: default;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 0 30px 0 0;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .submit-btn i {
+            font-size: 1.3rem;
+        }
+
+        .booking-platforms {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .platform-link {
+            padding: 0.8rem 2rem;
+            background: white;
+            color: #283b4f;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .platform-link:hover {
+            background: #283b4f;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Mini Cajas Call-to-Action según manual */
+        .cta-box {
+            display: inline-block;
+            padding: 1.5rem 2rem;
+            border-radius: 0 80px 0 0;
+            text-align: center;
+            transition: all 0.3s;
+            min-width: 150px;
+        }
+
+        .cta-box.primary {
+            background: #283b4f;
+            color: white;
+        }
+
+        .cta-box.secondary {
+            background: #bab3ae;
+            color: #283b4f;
+        }
+
+        .cta-box.light {
+            background: #f4ede3;
+            color: #283b4f;
+        }
+
+        .cta-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .cta-box i {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-box p {
+            font-family: 'Houschka Rounded', sans-serif;
+            font-weight: 500;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #283b4f;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right 0.4s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                padding: 1rem;
+                display: block;
+            }
+
+            nav {
+                justify-content: space-between;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content,
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo img {
+                height: 50px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-included h3 {
+                font-size: 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .service-item i {
+                font-size: 2rem;
+            }
+
+            .service-item p {
+                font-size: 0.9rem;
+            }
+
+            .carousel-slide {
+                height: 400px;
+            }
+
+            .carousel-caption h3 {
+                font-size: 1.3rem;
+            }
+
+            .carousel-caption p {
+                font-size: 0.9rem;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .reservation-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .submit-btn {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo"><img src="logo.png" alt="Terminal Suites"></div>
+            <button class="burger-menu" id="burgerMenu" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#apartamentos">Apartamentos</a></li>
+                <li><a href="#actividades">Actividades</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <a href="#contacto" class="cta-button">Reserva Ahora</a>
+            <p>Tu hogar en el corazón de El Calafate, Patagonia Argentina</p>
+        </div>
+    </section>
+
+    <!-- Nosotros -->
+    <section id="nosotros">
+        <h2 class="section-title">BIENVENIDOS A TERMINAL SUITES</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    Donde la comodidad y la elegancia se combinan para ofrecerte una experiencia única 
+                    en El Calafate, la joya turística de la Patagonia Austral Argentina. 
+                </p>
+                <p style="margin-top: 1rem;">
+                    Nuestros departamentos totalmente equipados están diseñados para brindarte el máximo 
+                    confort, en una ubicación estratégica y un entorno que refleja la magia de los glaciares.
+                </p>
+                <p style="margin-top: 1rem;">
+                    En Terminal Suites encontrarás el punto de partida perfecto para descubrir este destino 
+                    maravilloso. Déjate sorprender por la magia de El Calafate con nosotros.
+                </p>
+            </div>
+            <div class="about-image"><img src="img/about.webp" alt=""></div>
+        </div>
+    </section>
+
+    <!-- Ubicación -->
+    <section id="ubicacion" style="background: #f4ede3;">
+        <h2 class="section-title">UBICACIÓN PRIVILEGIADA</h2>
+        <div class="location-grid">
+            <div class="map-placeholder">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2547.0853667544407!2d-72.24723932344955!3d-50.33536917157032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbdbb0da45edb1935%3A0x6d748c028b251c43!2sTERMINAL%20SUITES!5e0!3m2!1ses-419!2sar!4v1760972823072!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="location-features">
+                <div class="location-item">
+                    <h3><i class="fas fa-bus"></i> Terminal de Buses</h3>
+                    <p>A solo 100 metros de la Terminal de Buses</p>
+                </div>
+                <div class="location-item">
+                    <h3><i class="fas fa-hospital"></i> Hospital Regional</h3>
+                    <p>A 200 metros del Hospital Regional</p>
+                </div>
+                <div class="location-item">
+                    <h3><i class="fas fa-mountain"></i> Glaciar Perito Moreno</h3>
+                    <p>A 70 km de una de las maravillas naturales más espectaculares del mundo</p>
+                </div>
+                <div class="location-item">
+                    <h3><i class="fas fa-map-marker-alt"></i> Dirección</h3>
+                    <p>Enrique Amado 235 - El Calafate, Patagonia Argentina</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apartamentos -->
+    <section id="apartamentos">
+        <h2 class="section-title">NUESTROS DEPARTAMENTOS</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem;">
+            8 unidades exclusivas de 70m², completamente equipadas y diseñadas para tu bienestar
+        </p>
+
+        <!-- Carrusel de Imágenes -->
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide">
+                    <img src="img/living1.webp" alt="Departamento Terminal Suites">
+                    <div class="carousel-caption">
+                        <h3>ESPACIOS AMPLIOS Y LUMINOSOS</h3>
+                        <p>Departamentos de 70m² diseñados para tu máximo confort</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img/tele.webp" alt="Living Terminal Suites">
+                    <div class="carousel-caption">
+                        <h3>LIVING TOTALMENTE EQUIPADO</h3>
+                        <p>Sofá, mesa, sillas y Smart TV de 52 pulgadas</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img/cocina2.webp" alt="Cocina Terminal Suites">
+                    <div class="carousel-caption">
+                        <h3>COCINA MODERNA</h3>
+                        <p>Heladera, microondas, anafe vitrocerámico y menaje completo</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img/habitacion4.webp" alt="Dormitorio Terminal Suites">
+                    <div class="carousel-caption">
+                        <h3>DORMITORIOS CONFORTABLES</h3>
+                        <p>Camas matrimoniales con ropa de cama premium</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img/banio.webp" alt="Baño Terminal Suites">
+                    <div class="carousel-caption">
+                        <h3>BAÑOS EQUIPADOS</h3>
+                        <p>Instalaciones modernas y toallas de primera calidad</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img/detalle.webp" alt="Detalle Terminal Suites">
+                    <div class="carousel-caption">
+                        <h3>ATENCIÓN AL DETALLE</h3>
+                        <p>Cada rincón pensado para tu bienestar</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de navegación -->
+            <button class="carousel-btn prev" id="prevBtn" aria-label="Anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn next" id="nextBtn" aria-label="Siguiente">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Indicadores -->
+            <div class="carousel-indicators" id="carouselIndicators"></div>
+        </div>
+
+        <!-- Grid de Características -->
+        <div class="apartments-grid">
+            <div class="apartment-card">
+                <div class="apartment-content">
+                    <h3>SALA DE ESTAR</h3>
+                    <ul class="amenities-list">
+                        <li>Amplio living de 70m²</li>
+                        <li>Sofá, mesa y sillas cómodas</li>
+                        <li>Smart TV de 52 pulgadas</li>
+                        <li>Wi-Fi de alta velocidad</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="apartment-card">
+                <div class="apartment-content">
+                    <h3>COCINA EQUIPADA</h3>
+                    <ul class="amenities-list">
+                        <li>Heladera y microondas</li>
+                        <li>Anafe vitrocerámico</li>
+                        <li>Pava eléctrica y tostadora</li>
+                        <li>Vajilla y utensilios completos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="apartment-card">
+                <div class="apartment-content">
+                    <h3>DORMITORIOS</h3>
+                    <ul class="amenities-list">
+                        <li>Dos camas matrimoniales</li>
+                        <li>Ropa de cama premium</li>
+                        <li>Cortinas blackout</li>
+                        <li>Armarios y mesas de luz</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-included">
+            <h3>SERVICIOS INCLUIDOS</h3>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-fire"></i>
+                    <p>Calefacción Central</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-wifi"></i>
+                    <p>Wi-Fi Gratuito</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-parking"></i>
+                    <p>Estacionamiento Privado</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-gift"></i>
+                    <p>Box de Bienvenida</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-concierge-bell"></i>
+                    <p>Servicio de Conserjería</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <p>Seguridad 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Actividades -->
+    <section id="actividades" style="background: #f4ede3;">
+        <h2 class="section-title">DESCUBRE EL CALAFATE</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem;">
+            El Calafate es la puerta de entrada al impresionante Glaciar Perito Moreno
+        </p>
+        
+        <div class="activities-grid">
+            <div class="activity-card">
+                <div class="activity-icon"><i class="fas fa-mountain"></i></div>
+                <h3>Parque Nacional Los Glaciares</h3>
+                <p>Explora el majestuoso Glaciar Perito Moreno y sus imponentes paredes de hielo</p>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-icon"><i class="fas fa-ship"></i></div>
+                <h3>Navegaciones</h3>
+                <p>Paseos en barco que te acercan a las paredes de hielo en un espectáculo inolvidable</p>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-icon"><i class="fas fa-hiking"></i></div>
+                <h3>Trekking sobre Hielo</h3>
+                <p>Caminatas sobre el glaciar para los más aventureros</p>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-icon"><i class="fas fa-water"></i></div>
+                <h3>Kayak en Lago Argentino</h3>
+                <p>Excursiones en kayak y visitas a glaciares como Upsala y Spegazzini</p>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-icon"><i class="fas fa-horse"></i></div>
+                <h3>Estancias Patagónicas</h3>
+                <p>Cabalgatas y visitas a estancias tradicionales para sumergirse en la vida rural</p>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-icon"><i class="fas fa-utensils"></i></div>
+                <h3>Gastronomía Local</h3>
+                <p>Descubre los sabores auténticos de la Patagonia con exquisita cocina local</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+        <div class="contact-section">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;">RESERVA TU ESTADÍA</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Completa el formulario y te responderemos por WhatsApp
+            </p>
+
+            <!-- Formulario de Reserva -->
+            <form class="reservation-form" id="reservationForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Ingresa tu nombre">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="checkin">Check-in</label>
+                        <div class="date-picker-container">
+                            <div class="date-input" id="checkinInput">
+                                <span>Selecciona una fecha</span>
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="calendar-dropdown" id="checkinCalendar">
+                                <div class="calendar-header">
+                                    <button type="button" id="checkinPrev"><i class="fas fa-chevron-left"></i></button>
+                                    <span id="checkinMonthYear"></span>
+                                    <button type="button" id="checkinNext"><i class="fas fa-chevron-right"></i></button>
+                                </div>
+                                <div class="calendar-weekdays">
+                                    <div class="calendar-weekday">Dom</div>
+                                    <div class="calendar-weekday">Lun</div>
+                                    <div class="calendar-weekday">Mar</div>
+                                    <div class="calendar-weekday">Mié</div>
+                                    <div class="calendar-weekday">Jue</div>
+                                    <div class="calendar-weekday">Vie</div>
+                                    <div class="calendar-weekday">Sáb</div>
+                                </div>
+                                <div class="calendar-days" id="checkinDays"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="checkout">Check-out</label>
+                        <div class="date-picker-container">
+                            <div class="date-input" id="checkoutInput">
+                                <span>Selecciona una fecha</span>
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="calendar-dropdown" id="checkoutCalendar">
+                                <div class="calendar-header">
+                                    <button type="button" id="checkoutPrev"><i class="fas fa-chevron-left"></i></button>
+                                    <span id="checkoutMonthYear"></span>
+                                    <button type="button" id="checkoutNext"><i class="fas fa-chevron-right"></i></button>
+                                </div>
+                                <div class="calendar-weekdays">
+                                    <div class="calendar-weekday">Dom</div>
+                                    <div class="calendar-weekday">Lun</div>
+                                    <div class="calendar-weekday">Mar</div>
+                                    <div class="calendar-weekday">Mié</div>
+                                    <div class="calendar-weekday">Jue</div>
+                                    <div class="calendar-weekday">Vie</div>
+                                    <div class="calendar-weekday">Sáb</div>
+                                </div>
+                                <div class="calendar-days" id="checkoutDays"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    Enviar por WhatsApp
+                </button>
+            </form>
+
+            <div style="text-align: center; margin: 2rem 0; color: rgba(255,255,255,0.8);">
+                <p>O también puedes reservar a través de:</p>
+            </div>
+
+            <div class="booking-platforms">
+                <a href="#" class="platform-link">Airbnb</a>
+                <a href="#" class="platform-link">Booking.com</a>
+                <a href="#" class="platform-link">Expedia</a>
+                <a href="#" class="platform-link">Google</a>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3><i class="fas fa-phone"></i> Teléfono</h3>
+                    <p>+54 2966 569953</p>
+                </div>
+
+                <div class="contact-item">
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p>terminalsuitesrelcalafate@gmail.com</p>
+                </div>
+
+                <div class="contact-item">
+                    <h3><i class="fab fa-instagram"></i> Instagram</h3>
+                    <p>@terminalsuites</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem; font-size: 1.1rem;">
+                ¡Estamos listos para recibirte!
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Terminal Suites - El Calafate, Patagonia Argentina</p>
+        <p style="margin-top: 0.5rem;">Enrique Amado 235 | +54 2966 569953</p>
+    </footer>
+
+    <script>
+        // Burger Menu
+        const burgerMenu = document.getElementById('burgerMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        burgerMenu.addEventListener('click', () => {
+            burgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '0.5rem 5%';
+            } else {
+                header.style.padding = '1rem 5%';
+            }
+        });
+
+        // Carrusel de Imágenes
+        class Carousel {
+            constructor() {
+                this.track = document.getElementById('carouselTrack');
+                this.slides = document.querySelectorAll('.carousel-slide');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.indicatorsContainer = document.getElementById('carouselIndicators');
+
+                this.currentIndex = 0;
+                this.totalSlides = this.slides.length;
+                this.autoplayInterval = null;
+
+                this.init();
+            }
+
+            init() {
+                // Crear indicadores
+                this.createIndicators();
+
+                // Event listeners para botones
+                this.prevBtn.addEventListener('click', () => this.prev());
+                this.nextBtn.addEventListener('click', () => this.next());
+
+                // Autoplay
+                this.startAutoplay();
+
+                // Pausar autoplay al hover
+                this.track.parentElement.addEventListener('mouseenter', () => this.stopAutoplay());
+                this.track.parentElement.addEventListener('mouseleave', () => this.startAutoplay());
+
+                // Touch events para móviles
+                this.addTouchEvents();
+            }
+
+            createIndicators() {
+                for (let i = 0; i < this.totalSlides; i++) {
+                    const indicator = document.createElement('button');
+                    indicator.classList.add('indicator');
+                    if (i === 0) indicator.classList.add('active');
+                    indicator.addEventListener('click', () => this.goToSlide(i));
+                    this.indicatorsContainer.appendChild(indicator);
+                }
+                this.indicators = document.querySelectorAll('.indicator');
+            }
+
+            updateCarousel() {
+                const offset = -this.currentIndex * 100;
+                this.track.style.transform = `translateX(${offset}%)`;
+
+                // Actualizar indicadores
+                this.indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === this.currentIndex);
+                });
+            }
+
+            next() {
+                this.currentIndex = (this.currentIndex + 1) % this.totalSlides;
+                this.updateCarousel();
+            }
+
+            prev() {
+                this.currentIndex = (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
+                this.updateCarousel();
+            }
+
+            goToSlide(index) {
+                this.currentIndex = index;
+                this.updateCarousel();
+            }
+
+            startAutoplay() {
+                this.autoplayInterval = setInterval(() => this.next(), 5000);
+            }
+
+            stopAutoplay() {
+                clearInterval(this.autoplayInterval);
+            }
+
+            addTouchEvents() {
+                let startX = 0;
+                let currentX = 0;
+
+                this.track.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+
+                this.track.addEventListener('touchmove', (e) => {
+                    currentX = e.touches[0].clientX;
+                });
+
+                this.track.addEventListener('touchend', () => {
+                    const diff = startX - currentX;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) {
+                            this.next();
+                        } else {
+                            this.prev();
+                        }
+                    }
+                });
+            }
+        }
+
+        // Inicializar carrusel cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            new Carousel();
+        });
+
+        // Date Picker Personalizado
+        class DatePicker {
+            constructor(type) {
+                this.type = type; // 'checkin' o 'checkout'
+                this.selectedDate = null;
+                this.currentMonth = new Date().getMonth();
+                this.currentYear = new Date().getFullYear();
+
+                this.input = document.getElementById(`${type}Input`);
+                this.calendar = document.getElementById(`${type}Calendar`);
+                this.monthYear = document.getElementById(`${type}MonthYear`);
+                this.daysContainer = document.getElementById(`${type}Days`);
+                this.prevBtn = document.getElementById(`${type}Prev`);
+                this.nextBtn = document.getElementById(`${type}Next`);
+
+                this.init();
+            }
+
+            init() {
+                this.input.addEventListener('click', () => this.toggle());
+                this.prevBtn.addEventListener('click', () => this.changeMonth(-1));
+                this.nextBtn.addEventListener('click', () => this.changeMonth(1));
+
+                // Cerrar calendario al hacer clic fuera
+                document.addEventListener('click', (e) => {
+                    if (!this.input.contains(e.target) && !this.calendar.contains(e.target)) {
+                        this.close();
+                    }
+                });
+
+                this.renderCalendar();
+            }
+
+            toggle() {
+                this.calendar.classList.toggle('active');
+                this.input.classList.toggle('active');
+                if (this.calendar.classList.contains('active')) {
+                    this.renderCalendar();
+                }
+            }
+
+            close() {
+                this.calendar.classList.remove('active');
+                this.input.classList.remove('active');
+            }
+
+            changeMonth(delta) {
+                this.currentMonth += delta;
+                if (this.currentMonth > 11) {
+                    this.currentMonth = 0;
+                    this.currentYear++;
+                } else if (this.currentMonth < 0) {
+                    this.currentMonth = 11;
+                    this.currentYear--;
+                }
+                this.renderCalendar();
+            }
+
+            renderCalendar() {
+                const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                               'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+                this.monthYear.textContent = `${months[this.currentMonth]} ${this.currentYear}`;
+
+                const firstDay = new Date(this.currentYear, this.currentMonth, 1).getDay();
+                const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                this.daysContainer.innerHTML = '';
+
+                // Días vacíos al inicio
+                for (let i = 0; i < firstDay; i++) {
+                    const emptyDay = document.createElement('button');
+                    emptyDay.type = 'button';
+                    emptyDay.classList.add('calendar-day', 'empty');
+                    this.daysContainer.appendChild(emptyDay);
+                }
+
+                // Días del mes
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayBtn = document.createElement('button');
+                    dayBtn.type = 'button';
+                    dayBtn.classList.add('calendar-day');
+                    dayBtn.textContent = day;
+
+                    const dayDate = new Date(this.currentYear, this.currentMonth, day);
+                    dayDate.setHours(0, 0, 0, 0);
+
+                    // Deshabilitar fechas pasadas
+                    if (dayDate < today) {
+                        dayBtn.classList.add('disabled');
+                    } else {
+                        dayBtn.addEventListener('click', () => this.selectDate(day));
+                    }
+
+                    // Marcar día seleccionado
+                    if (this.selectedDate &&
+                        this.selectedDate.getDate() === day &&
+                        this.selectedDate.getMonth() === this.currentMonth &&
+                        this.selectedDate.getFullYear() === this.currentYear) {
+                        dayBtn.classList.add('selected');
+                    }
+
+                    this.daysContainer.appendChild(dayBtn);
+                }
+            }
+
+            selectDate(day) {
+                this.selectedDate = new Date(this.currentYear, this.currentMonth, day);
+                const formattedDate = this.formatDate(this.selectedDate);
+                this.input.querySelector('span').textContent = formattedDate;
+                this.close();
+            }
+
+            formatDate(date) {
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                return `${day}/${month}/${year}`;
+            }
+
+            getSelectedDate() {
+                return this.selectedDate;
+            }
+        }
+
+        // Inicializar Date Pickers
+        let checkinPicker, checkoutPicker;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkinPicker = new DatePicker('checkin');
+            checkoutPicker = new DatePicker('checkout');
+        });
+
+        // Formulario de Reserva por WhatsApp
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Obtener los valores del formulario
+            const nombre = document.getElementById('nombre').value;
+            const checkinDate = checkinPicker.getSelectedDate();
+            const checkoutDate = checkoutPicker.getSelectedDate();
+
+            // Validar que se hayan seleccionado las fechas
+            if (!checkinDate || !checkoutDate) {
+                alert('Por favor selecciona las fechas de check-in y check-out');
+                return;
+            }
+
+            // Validar que check-out sea después de check-in
+            if (checkoutDate <= checkinDate) {
+                alert('La fecha de check-out debe ser posterior a la fecha de check-in');
+                return;
+            }
+
+            // Formatear las fechas
+            const checkinFormatted = checkinPicker.formatDate(checkinDate);
+            const checkoutFormatted = checkoutPicker.formatDate(checkoutDate);
+
+            // Crear el mensaje de WhatsApp
+            const mensaje = `¡Hola! Me gustaría hacer una reserva en Terminal Suites:%0A%0A` +
+                          `*Nombre:* ${nombre}%0A` +
+                          `*Check-in:* ${checkinFormatted}%0A` +
+                          `*Check-out:* ${checkoutFormatted}%0A%0A` +
+                          `¿Tienen disponibilidad para estas fechas?`;
+
+            // Número de WhatsApp de Terminal Suites
+            const numeroWhatsApp = '5492966569953'; // +54 2966 569953
+
+            // Abrir WhatsApp
+            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+        });
+    </script>
+</body>
+</html>
