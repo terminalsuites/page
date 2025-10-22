@@ -699,7 +699,8 @@
             font-size: 1rem;
         }
 
-        .form-group input[type="text"] {
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
             width: 100%;
             padding: 1rem;
             border: 2px solid #bab3ae;
@@ -711,7 +712,8 @@
             color: #3f3f3f;
         }
 
-        .form-group input[type="text"]:focus {
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus {
             outline: none;
             border-color: #283b4f;
             box-shadow: 0 0 0 3px rgba(40, 59, 79, 0.1);
@@ -872,7 +874,7 @@
             background: #25D366;
             color: white;
             border: none;
-            border-radius: 0 30px 0 0;
+            border-radius: 30px;
             font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
@@ -1124,7 +1126,7 @@
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="#apartamentos">Apartamentos</a></li>
                 <li><a href="#actividades">Actividades</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#contacto">Reserva</a></li>
             </ul>
         </nav>
     </header>
@@ -1391,6 +1393,11 @@
                     <input type="text" id="nombre" name="nombre" required placeholder="Ingresa tu nombre">
                 </div>
 
+                <div class="form-group">
+                    <label for="personas">Cantidad de personas</label>
+                    <input type="number" id="personas" name="personas" min="1" max="10" required placeholder="Número de huéspedes">
+                </div>
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="checkin">Check-in</label>
@@ -1458,8 +1465,9 @@
             </div>
 
             <div class="booking-platforms">
-                <a href="#" class="platform-link">Airbnb</a>
-                <a target="_blank" href="https://www.booking.com/Share-0yqNGh" class="platform-link">Booking.com</a>
+                <a class="platform-link" target="_blank" href="https://www.airbnb.mx/rooms/1241439710037018788?check_in=2025-11-04&check_out=2025-11-09&guests=1&adults=1&s=67&unique_share_id=cf010a6a-9340-4978-bdad-661d7ff816fb">Airbnb</a>
+                <a class="platform-link" target="_blank" href="https://www.expedia.ca/El-Calafate-Hotels-Terminal-Suites.h116512955.Hotel-Information?referrerId=HOT.HIS.Share.Landed.Copy_Link">Expedia</a>
+                <a class="platform-link" target="_blank" href="https://www.booking.com/hotel/ar/apart-austral-el-calafate.es.html?aid=356980&label=gog235jc-10CAsoDEIZYXBhcnQtYXVzdHJhbC1lbC1jYWxhZmF0ZUgsWANoDIgBAZgBM7gBF8gBD9gBA-gBAfgBAYgCAagCAbgCjN3jxwbAAgHSAiQxY2NkNmVhYi0yOTdlLTQ5NDQtOWM3My00M2VkMmI0NThmYTLYAgHgAgE-Share-0yqNGh%401761144483&sid=02019a44e9a0233a4510a3f7165bb783&dest_id=-985388&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1761150271&srpvid=725b7357a857000e&type=total&ucfs=1&">Booking.com</a>
             </div>
 
             <div class="contact-info">
@@ -1779,6 +1787,7 @@
 
             // Obtener los valores del formulario
             const nombre = document.getElementById('nombre').value;
+            const personas = document.getElementById('personas').value;
             const checkinDate = checkinPicker.getSelectedDate();
             const checkoutDate = checkoutPicker.getSelectedDate();
 
@@ -1801,6 +1810,7 @@
             // Crear el mensaje de WhatsApp
             const mensaje = `¡Hola! Me gustaría hacer una reserva en Terminal Suites:%0A%0A` +
                           `*Nombre:* ${nombre}%0A` +
+                          `*Cantidad de personas:* ${personas}%0A` +
                           `*Check-in:* ${checkinFormatted}%0A` +
                           `*Check-out:* ${checkoutFormatted}%0A%0A` +
                           `¿Tienen disponibilidad para estas fechas?`;
