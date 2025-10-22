@@ -1,0 +1,2 @@
+- seleccionar fotos para el carrusel
+- convertir a webp
