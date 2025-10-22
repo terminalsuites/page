@@ -167,7 +167,7 @@
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), 
-                        url('img/background.jpeg') no-repeat center center/cover;
+                        url('img/background.webp') no-repeat center center/cover;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -397,7 +397,7 @@
             background: rgba(255,255,255,0.9);
             color: #283b4f;
             border: none;
-            width: 50px;
+            width: 35px;
             height: 50px;
             cursor: pointer;
             font-size: 1.5rem;
@@ -422,6 +422,14 @@
         .carousel-btn.next {
             right: 1rem;
             border-radius: 0 25px 25px 0;
+        }
+
+        .prev i {
+            padding-left: 5px;
+        }
+
+        .next i {
+            padding-right: 5px;
         }
 
         /* Indicadores */
@@ -882,7 +890,7 @@
                     maravilloso. Déjate sorprender por la magia de El Calafate con nosotros.
                 </p>
             </div>
-            <div class="about-image"><img src="home.webp" alt=""></div>
+            <div class="about-image"><img src="img/home.webp" alt=""></div>
         </div>
     </section>
 
@@ -925,56 +933,42 @@
         <div class="carousel-container">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide">
-                    <img src="img/1.webp" alt="Departamento Terminal Suites">
+                    <img src="img/living1.webp" alt="Departamento Terminal Suites">
                     <div class="carousel-caption">
                         <h3>ESPACIOS AMPLIOS Y LUMINOSOS</h3>
                         <p>Departamentos de 70m² diseñados para tu máximo confort</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="img/2.webp" alt="Living Terminal Suites">
+                    <img src="img/tele.webp" alt="Living Terminal Suites">
                     <div class="carousel-caption">
                         <h3>LIVING TOTALMENTE EQUIPADO</h3>
                         <p>Sofá, mesa, sillas y Smart TV de 52 pulgadas</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="img/3.webp" alt="Cocina Terminal Suites">
+                    <img src="img/cocina2.webp" alt="Cocina Terminal Suites">
                     <div class="carousel-caption">
                         <h3>COCINA MODERNA</h3>
                         <p>Heladera, microondas, anafe vitrocerámico y menaje completo</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="img/4.webp" alt="Dormitorio Terminal Suites">
+                    <img src="img/habitacion4.webp" alt="Dormitorio Terminal Suites">
                     <div class="carousel-caption">
                         <h3>DORMITORIOS CONFORTABLES</h3>
                         <p>Camas matrimoniales con ropa de cama premium</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="img/5.webp" alt="Baño Terminal Suites">
+                    <img src="img/baño.webp" alt="Baño Terminal Suites">
                     <div class="carousel-caption">
                         <h3>BAÑOS EQUIPADOS</h3>
                         <p>Instalaciones modernas y toallas de primera calidad</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="img/6.webp" alt="Comedor Terminal Suites">
-                    <div class="carousel-caption">
-                        <h3>COMEDOR ESPACIOSO</h3>
-                        <p>Mesa para compartir momentos únicos</p>
-                    </div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="img/7.webp" alt="Vista Terminal Suites">
-                    <div class="carousel-caption">
-                        <h3>VISTAS INCREÍBLES</h3>
-                        <p>Disfruta de las mejores vistas de El Calafate</p>
-                    </div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="img/8.webp" alt="Detalle Terminal Suites">
+                    <img src="img/detalle.webp" alt="Detalle Terminal Suites">
                     <div class="carousel-caption">
                         <h3>ATENCIÓN AL DETALLE</h3>
                         <p>Cada rincón pensado para tu bienestar</p>
@@ -997,7 +991,6 @@
         <!-- Grid de Características -->
         <div class="apartments-grid">
             <div class="apartment-card">
-                <div class="apartment-image"><img src="living.webp" alt=""></div>
                 <div class="apartment-content">
                     <h3>SALA DE ESTAR</h3>
                     <ul class="amenities-list">
@@ -1010,7 +1003,6 @@
             </div>
 
             <div class="apartment-card">
-                <div class="apartment-image"><img src="cocina.webp" alt=""></div>
                 <div class="apartment-content">
                     <h3>COCINA EQUIPADA</h3>
                     <ul class="amenities-list">
@@ -1023,7 +1015,6 @@
             </div>
 
             <div class="apartment-card">
-                <div class="apartment-image"><img src="habitacion.webp" alt=""></div>
                 <div class="apartment-content">
                     <h3>DORMITORIOS</h3>
                     <ul class="amenities-list">
