@@ -64,7 +64,7 @@
         header {
             position: fixed;
             width: 100%;
-            background: #f4ede3;
+            background: #eee6db;
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             z-index: 1000;
@@ -1452,9 +1452,7 @@
 
             <div class="booking-platforms">
                 <a href="#" class="platform-link">Airbnb</a>
-                <a href="#" class="platform-link">Booking.com</a>
-                <a href="#" class="platform-link">Expedia</a>
-                <a href="#" class="platform-link">Google</a>
+                <a target="_blank" href="https://www.booking.com/Share-0yqNGh" class="platform-link">Booking.com</a>
             </div>
 
             <div class="contact-info">
@@ -1522,16 +1520,6 @@
                     });
                 }
             });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.padding = '0.5rem 5%';
-            } else {
-                header.style.padding = '1rem 5%';
-            }
         });
 
         // Carrusel de Imágenes
