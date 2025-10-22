@@ -964,6 +964,21 @@
             padding: 2.5rem;
             border-radius: 0 40px 0 0;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .reservation-form.highlight {
+            animation: highlightForm 1s ease-out;
+        }
+
+        @keyframes highlightForm {
+            0%, 100% {
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 15px 60px rgba(40, 59, 79, 0.5);
+                transform: scale(1.02);
+            }
         }
 
         .form-group {
@@ -2236,7 +2251,7 @@
             window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
         });
 
-        // Formulario de Reserva Hero por WhatsApp
+        // Formulario de Reserva Hero - Transferir datos al formulario de contacto
         document.getElementById('heroBookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -2257,22 +2272,44 @@
                 return;
             }
 
+            // Transferir los datos al formulario de contacto
             // Formatear las fechas
             const checkinFormatted = heroCheckinPicker.formatDate(checkinDate);
             const checkoutFormatted = heroCheckoutPicker.formatDate(checkoutDate);
 
-            // Crear el mensaje de WhatsApp
-            const mensaje = `¡Hola! Me gustaría hacer una reserva en Terminal Suites:%0A%0A` +
-                          `*Cantidad de personas:* ${personas}%0A` +
-                          `*Check-in:* ${checkinFormatted}%0A` +
-                          `*Check-out:* ${checkoutFormatted}%0A%0A` +
-                          `¿Tienen disponibilidad para estas fechas?`;
+            // Transferir cantidad de personas
+            document.getElementById('personas').value = personas;
 
-            // Número de WhatsApp de Terminal Suites
-            const numeroWhatsApp = '5492966569953'; // +54 2966 569953
+            // Transferir fechas a los date pickers del formulario de contacto
+            checkinPicker.selectedDate = checkinDate;
+            checkinPicker.input.querySelector('span').textContent = checkinFormatted;
+            checkinPicker.input.querySelector('span').classList.add('selected');
 
-            // Abrir WhatsApp
-            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+            checkoutPicker.selectedDate = checkoutDate;
+            checkoutPicker.input.querySelector('span').textContent = checkoutFormatted;
+            checkoutPicker.input.querySelector('span').classList.add('selected');
+
+            // Hacer scroll suave a la sección de contacto
+            const contactSection = document.getElementById('contacto');
+            contactSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            // Agregar efecto highlight al formulario
+            const reservationForm = document.getElementById('reservationForm');
+            setTimeout(() => {
+                reservationForm.classList.add('highlight');
+                // Remover la clase después de la animación
+                setTimeout(() => {
+                    reservationForm.classList.remove('highlight');
+                }, 1000);
+            }, 500);
+
+            // Enfocar el campo de nombre después de un pequeño delay
+            setTimeout(() => {
+                document.getElementById('nombre').focus();
+            }, 1000);
         });
     </script>
 </body>
