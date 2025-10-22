@@ -64,7 +64,7 @@
         header {
             position: fixed;
             width: 100%;
-            background: #eee6db;
+            background: #eee6dbc1;
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             z-index: 1000;
@@ -166,22 +166,96 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), 
-                        url('img/estacionamiento.webp') no-repeat center center/cover;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
             text-align: center;
             color: white;
             position: relative;
+            overflow: hidden;
+            padding-bottom: 15px !important;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -5%;
+            left: -5%;
+            width: 110%;
+            height: 110%;
+            background: url('img/background2.webp') no-repeat center center;
+            background-size: cover;
+            animation: kenBurns 20s ease-in-out infinite alternate;
+            z-index: -2;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+            z-index: -1;
+        }
+
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+            100% {
+                transform: scale(1.1) translate(-2%, -2%);
+            }
         }
 
         .hero-content {
             animation: fadeInUp 1s ease-out;
-            margin-top: 15vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Botón de Play */
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .play-button:hover {
+            background: rgba(40, 59, 79, 0.9);
+            border-color: white;
+            transform: translate(-50%, -50%) scale(1.1);
+            animation: none;
+        }
+
+        .play-button i {
+            color: white;
+            font-size: 2rem;
+            margin-left: 5px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+            }
         }
 
         .hero h1 {
@@ -200,26 +274,231 @@
             text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 3rem;
-            background: #283b4f;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(40,59,79,0.4);
+        /* Formulario de Reserva en Hero */
+        .hero-booking-form {
+            background: rgba(255, 255, 255, 0.58);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            border-radius: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .cta-button:hover {
+        .hero-form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-form-group label {
+            display: none;
+        }
+
+        .hero-form-group input[type="number"] {
+            padding: 1rem 1.2rem;
+            border: 2px solid #bab3ae;
+            border-radius: 60px;
+            font-family: 'Houschka Rounded', 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            background: white;
+            color: #3f3f3f;
+            transition: all 0.3s;
+            width: 100%;
+            min-width: 140px;
+        }
+
+        .hero-form-group input[type="number"]::placeholder {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Ocultar flechas del input number en Chrome, Safari, Edge */
+        .hero-form-group input[type="number"]::-webkit-outer-spin-button,
+        .hero-form-group input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+
+        /* Ocultar flechas del input number en Firefox */
+        .hero-form-group input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+        .hero-form-group input[type="number"]:focus {
+            outline: none;
+            border-color: #283b4f;
+            box-shadow: 0 0 0 3px rgba(40, 59, 79, 0.1);
+        }
+
+        .hero-date-input {
+            padding: 0.8rem 1rem;
+            border: 2px solid #bab3ae;
+            border-radius: 60px;
+            font-family: 'Houschka Rounded', 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            background: white;
+            color: #3f3f3f;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s;
+            min-width: 150px;
+            gap: 0.5rem;
+        }
+
+        .hero-date-input:hover {
+            border-color: #283b4f;
+        }
+
+        .hero-date-input.active {
+            border-color: #283b4f;
+            box-shadow: 0 0 0 3px rgba(40, 59, 79, 0.1);
+        }
+
+        .hero-date-input span {
+            font-size: 0.9rem;
+            white-space: nowrap;
+            color: #888;
+        }
+
+        .hero-date-input span.selected {
+            color: #3f3f3f;
+        }
+
+        .hero-date-input i {
+            color: #283b4f;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .hero-submit-btn {
+            padding: 0.8rem 2rem;
+            background: #283b4f;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .hero-submit-btn:hover {
             background: #1e2a3a;
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(40,59,79,0.6);
+            box-shadow: 0 8px 25px rgba(40, 59, 79, 0.4);
+        }
+
+        .hero-submit-btn i {
+            font-size: 1.2rem;
+        }
+
+        .hero-date-picker-container {
+            position: relative;
+        }
+
+        /* Modal para Date Picker */
+        .calendar-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .calendar-modal.active {
+            display: flex;
+        }
+
+        .calendar-modal-content {
+            background: white;
+            border-radius: 0 30px 0 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .calendar-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f4ede3;
+        }
+
+        .calendar-modal-title {
+            font-size: 1.3rem;
+            color: #283b4f;
+            font-weight: 700;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .calendar-modal-close {
+            background: none;
+            border: none;
+            color: #283b4f;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .calendar-modal-close:hover {
+            background: #f4ede3;
+            transform: rotate(90deg);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Secciones */
@@ -759,23 +1038,6 @@
             color: #283b4f;
         }
 
-        .calendar-dropdown {
-            position: absolute;
-            top: calc(100% + 0.5rem);
-            left: 0;
-            right: 0;
-            background: white;
-            border-radius: 0 20px 0 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 1rem;
-            z-index: 100;
-            display: none;
-        }
-
-        .calendar-dropdown.active {
-            display: block;
-        }
-
         .calendar-header {
             display: flex;
             justify-content: space-between;
@@ -871,7 +1133,7 @@
         .submit-btn {
             width: 100%;
             padding: 1.2rem;
-            background: #25D366;
+            background: #283b4f;
             color: white;
             border: none;
             border-radius: 30px;
@@ -889,9 +1151,9 @@
         }
 
         .submit-btn:hover {
-            background: #128C7E;
+            background: #1e2a3a;
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 8px 25px rgba(40, 59, 79, 0.4);
         }
 
         .submit-btn i {
@@ -983,6 +1245,29 @@
 
         footer i {
             margin: 0 0.3rem;
+        }
+
+        /* Botón CTA para móvil (oculto por defecto) */
+        .hero-mobile-cta {
+            display: none;
+            padding: 1rem 3rem;
+            background: #283b4f;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(40,59,79,0.4);
+        }
+
+        .hero-mobile-cta:hover {
+            background: #1e2a3a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(40,59,79,0.6);
         }
 
         /* Animaciones */
@@ -1108,6 +1393,61 @@
             .submit-btn {
                 font-size: 1rem;
             }
+
+            .hero-booking-form {
+                flex-direction: column;
+                padding: 1.5rem;
+                border-radius: 30px;
+                gap: 1rem;
+            }
+
+            .hero-form-group {
+                width: 100%;
+            }
+
+            .hero-submit-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem;
+            }
+
+            .hero-date-input {
+                min-width: unset;
+            }
+
+            /* Ocultar formulario de reserva en móvil */
+            .hero-booking-form {
+                display: none;
+            }
+
+            /* Mostrar botón de reserva simple en móvil */
+            .hero-mobile-cta {
+                display: block !important;
+            }
+
+            .play-button {
+                width: 60px;
+                height: 60px;
+            }
+
+            .play-button i {
+                font-size: 1.5rem;
+                margin-left: 3px;
+            }
+
+            /* Reducir el efecto Ken Burns en móviles para mejor rendimiento */
+            .hero::before {
+                animation: kenBurnsMobile 15s ease-in-out infinite alternate;
+            }
+
+            @keyframes kenBurnsMobile {
+                0% {
+                    transform: scale(1.05) translate(0, 0);
+                }
+                100% {
+                    transform: scale(1.1) translate(-1%, -1%);
+                }
+            }
         }
     </style>
 </head>
@@ -1133,9 +1473,45 @@
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
+        <a href="#nosotros" class="play-button">
+            <i class="fas fa-play"></i>
+        </a>
         <div class="hero-content">
-            <a href="#contacto" class="cta-button">Reserva Ahora</a>
-            <p>Tu hogar en el corazón de El Calafate, Patagonia Argentina</p>
+            <!-- Formulario de reserva (visible en desktop) -->
+            <form class="hero-booking-form" id="heroBookingForm">
+                <div class="hero-form-group">
+                    <label for="hero-checkin">Check-in</label>
+                    <div class="hero-date-picker-container">
+                        <div class="hero-date-input" id="heroCheckinInput" data-calendar-type="heroCheckin">
+                            <span>Check-in</span>
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-form-group">
+                    <label for="hero-checkout">Check-out</label>
+                    <div class="hero-date-picker-container">
+                        <div class="hero-date-input" id="heroCheckoutInput" data-calendar-type="heroCheckout">
+                            <span>Check-out</span>
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-form-group">
+                    <label for="hero-personas">Personas</label>
+                    <input type="number" id="hero-personas" name="personas" min="1" max="10" required placeholder="Personas">
+                </div>
+
+                <button type="submit" class="hero-submit-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    Reservar
+                </button>
+            </form>
+
+            <!-- Botón simple (visible en móvil) -->
+            <a href="#contacto" class="hero-mobile-cta">Reservar ahora</a>
         </div>
     </section>
 
@@ -1402,26 +1778,9 @@
                     <div class="form-group">
                         <label for="checkin">Check-in</label>
                         <div class="date-picker-container">
-                            <div class="date-input" id="checkinInput">
+                            <div class="date-input" id="checkinInput" data-calendar-type="checkin">
                                 <span>Selecciona una fecha</span>
                                 <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div class="calendar-dropdown" id="checkinCalendar">
-                                <div class="calendar-header">
-                                    <button type="button" id="checkinPrev"><i class="fas fa-chevron-left"></i></button>
-                                    <span id="checkinMonthYear"></span>
-                                    <button type="button" id="checkinNext"><i class="fas fa-chevron-right"></i></button>
-                                </div>
-                                <div class="calendar-weekdays">
-                                    <div class="calendar-weekday">Dom</div>
-                                    <div class="calendar-weekday">Lun</div>
-                                    <div class="calendar-weekday">Mar</div>
-                                    <div class="calendar-weekday">Mié</div>
-                                    <div class="calendar-weekday">Jue</div>
-                                    <div class="calendar-weekday">Vie</div>
-                                    <div class="calendar-weekday">Sáb</div>
-                                </div>
-                                <div class="calendar-days" id="checkinDays"></div>
                             </div>
                         </div>
                     </div>
@@ -1429,26 +1788,9 @@
                     <div class="form-group">
                         <label for="checkout">Check-out</label>
                         <div class="date-picker-container">
-                            <div class="date-input" id="checkoutInput">
+                            <div class="date-input" id="checkoutInput" data-calendar-type="checkout">
                                 <span>Selecciona una fecha</span>
                                 <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div class="calendar-dropdown" id="checkoutCalendar">
-                                <div class="calendar-header">
-                                    <button type="button" id="checkoutPrev"><i class="fas fa-chevron-left"></i></button>
-                                    <span id="checkoutMonthYear"></span>
-                                    <button type="button" id="checkoutNext"><i class="fas fa-chevron-right"></i></button>
-                                </div>
-                                <div class="calendar-weekdays">
-                                    <div class="calendar-weekday">Dom</div>
-                                    <div class="calendar-weekday">Lun</div>
-                                    <div class="calendar-weekday">Mar</div>
-                                    <div class="calendar-weekday">Mié</div>
-                                    <div class="calendar-weekday">Jue</div>
-                                    <div class="calendar-weekday">Vie</div>
-                                    <div class="calendar-weekday">Sáb</div>
-                                </div>
-                                <div class="calendar-days" id="checkoutDays"></div>
                             </div>
                         </div>
                     </div>
@@ -1504,6 +1846,33 @@
             <i class="fas fa-laptop-code" style="margin-left: 0.3rem;"></i>
         </p>
     </footer>
+
+    <!-- Modal de Calendario -->
+    <div class="calendar-modal" id="calendarModal">
+        <div class="calendar-modal-content">
+            <div class="calendar-modal-header">
+                <h3 class="calendar-modal-title" id="calendarModalTitle">Selecciona una fecha</h3>
+                <button type="button" class="calendar-modal-close" id="calendarModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="calendar-header">
+                <button type="button" id="modalCalendarPrev"><i class="fas fa-chevron-left"></i></button>
+                <span id="modalCalendarMonthYear"></span>
+                <button type="button" id="modalCalendarNext"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="calendar-weekdays">
+                <div class="calendar-weekday">Dom</div>
+                <div class="calendar-weekday">Lun</div>
+                <div class="calendar-weekday">Mar</div>
+                <div class="calendar-weekday">Mié</div>
+                <div class="calendar-weekday">Jue</div>
+                <div class="calendar-weekday">Vie</div>
+                <div class="calendar-weekday">Sáb</div>
+            </div>
+            <div class="calendar-days" id="modalCalendarDays"></div>
+        </div>
+    </div>
 
     <script>
         // Burger Menu
@@ -1646,50 +2015,37 @@
             new Carousel();
         });
 
-        // Date Picker Personalizado
+        // Date Picker con Modal
         class DatePicker {
             constructor(type) {
-                this.type = type; // 'checkin' o 'checkout'
+                this.type = type;
                 this.selectedDate = null;
                 this.currentMonth = new Date().getMonth();
                 this.currentYear = new Date().getFullYear();
-
                 this.input = document.getElementById(`${type}Input`);
-                this.calendar = document.getElementById(`${type}Calendar`);
-                this.monthYear = document.getElementById(`${type}MonthYear`);
-                this.daysContainer = document.getElementById(`${type}Days`);
-                this.prevBtn = document.getElementById(`${type}Prev`);
-                this.nextBtn = document.getElementById(`${type}Next`);
 
                 this.init();
             }
 
             init() {
-                this.input.addEventListener('click', () => this.toggle());
-                this.prevBtn.addEventListener('click', () => this.changeMonth(-1));
-                this.nextBtn.addEventListener('click', () => this.changeMonth(1));
-
-                // Cerrar calendario al hacer clic fuera
-                document.addEventListener('click', (e) => {
-                    if (!this.input.contains(e.target) && !this.calendar.contains(e.target)) {
-                        this.close();
-                    }
-                });
-
-                this.renderCalendar();
+                this.input.addEventListener('click', () => this.openModal());
             }
 
-            toggle() {
-                this.calendar.classList.toggle('active');
-                this.input.classList.toggle('active');
-                if (this.calendar.classList.contains('active')) {
-                    this.renderCalendar();
+            openModal() {
+                window.currentDatePicker = this;
+                const modal = document.getElementById('calendarModal');
+                const title = document.getElementById('calendarModalTitle');
+
+                // Actualizar título según el tipo
+                if (this.type.includes('checkin') || this.type.includes('Checkin')) {
+                    title.textContent = 'Selecciona Check-in';
+                } else {
+                    title.textContent = 'Selecciona Check-out';
                 }
-            }
 
-            close() {
-                this.calendar.classList.remove('active');
-                this.input.classList.remove('active');
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevenir scroll del body
+                this.renderCalendar();
             }
 
             changeMonth(delta) {
@@ -1708,21 +2064,24 @@
                 const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
                                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-                this.monthYear.textContent = `${months[this.currentMonth]} ${this.currentYear}`;
+                const monthYear = document.getElementById('modalCalendarMonthYear');
+                const daysContainer = document.getElementById('modalCalendarDays');
+
+                monthYear.textContent = `${months[this.currentMonth]} ${this.currentYear}`;
 
                 const firstDay = new Date(this.currentYear, this.currentMonth, 1).getDay();
                 const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
                 const today = new Date();
                 today.setHours(0, 0, 0, 0);
 
-                this.daysContainer.innerHTML = '';
+                daysContainer.innerHTML = '';
 
                 // Días vacíos al inicio
                 for (let i = 0; i < firstDay; i++) {
                     const emptyDay = document.createElement('button');
                     emptyDay.type = 'button';
                     emptyDay.classList.add('calendar-day', 'empty');
-                    this.daysContainer.appendChild(emptyDay);
+                    daysContainer.appendChild(emptyDay);
                 }
 
                 // Días del mes
@@ -1750,15 +2109,23 @@
                         dayBtn.classList.add('selected');
                     }
 
-                    this.daysContainer.appendChild(dayBtn);
+                    daysContainer.appendChild(dayBtn);
                 }
             }
 
             selectDate(day) {
                 this.selectedDate = new Date(this.currentYear, this.currentMonth, day);
                 const formattedDate = this.formatDate(this.selectedDate);
-                this.input.querySelector('span').textContent = formattedDate;
-                this.close();
+                const span = this.input.querySelector('span');
+                span.textContent = formattedDate;
+                span.classList.add('selected');
+                this.closeModal();
+            }
+
+            closeModal() {
+                const modal = document.getElementById('calendarModal');
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Restaurar scroll del body
             }
 
             formatDate(date) {
@@ -1773,12 +2140,59 @@
             }
         }
 
+        // Variable global para mantener referencia al DatePicker actual
+        window.currentDatePicker = null;
+
         // Inicializar Date Pickers
         let checkinPicker, checkoutPicker;
+        let heroCheckinPicker, heroCheckoutPicker;
 
         document.addEventListener('DOMContentLoaded', () => {
             checkinPicker = new DatePicker('checkin');
             checkoutPicker = new DatePicker('checkout');
+            heroCheckinPicker = new DatePicker('heroCheckin');
+            heroCheckoutPicker = new DatePicker('heroCheckout');
+
+            // Event listeners para el modal de calendario
+            const modal = document.getElementById('calendarModal');
+            const closeBtn = document.getElementById('calendarModalClose');
+            const prevBtn = document.getElementById('modalCalendarPrev');
+            const nextBtn = document.getElementById('modalCalendarNext');
+
+            // Cerrar modal con el botón X
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // Cerrar modal al hacer clic fuera del contenido
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Botones de navegación del calendario
+            prevBtn.addEventListener('click', () => {
+                if (window.currentDatePicker) {
+                    window.currentDatePicker.changeMonth(-1);
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (window.currentDatePicker) {
+                    window.currentDatePicker.changeMonth(1);
+                }
+            });
+
+            // Cerrar con tecla ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
         });
 
         // Formulario de Reserva por WhatsApp
@@ -1810,6 +2224,45 @@
             // Crear el mensaje de WhatsApp
             const mensaje = `¡Hola! Me gustaría hacer una reserva en Terminal Suites:%0A%0A` +
                           `*Nombre:* ${nombre}%0A` +
+                          `*Cantidad de personas:* ${personas}%0A` +
+                          `*Check-in:* ${checkinFormatted}%0A` +
+                          `*Check-out:* ${checkoutFormatted}%0A%0A` +
+                          `¿Tienen disponibilidad para estas fechas?`;
+
+            // Número de WhatsApp de Terminal Suites
+            const numeroWhatsApp = '5492966569953'; // +54 2966 569953
+
+            // Abrir WhatsApp
+            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+        });
+
+        // Formulario de Reserva Hero por WhatsApp
+        document.getElementById('heroBookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Obtener los valores del formulario
+            const personas = document.getElementById('hero-personas').value;
+            const checkinDate = heroCheckinPicker.getSelectedDate();
+            const checkoutDate = heroCheckoutPicker.getSelectedDate();
+
+            // Validar que se hayan seleccionado las fechas
+            if (!checkinDate || !checkoutDate) {
+                alert('Por favor selecciona las fechas de check-in y check-out');
+                return;
+            }
+
+            // Validar que check-out sea después de check-in
+            if (checkoutDate <= checkinDate) {
+                alert('La fecha de check-out debe ser posterior a la fecha de check-in');
+                return;
+            }
+
+            // Formatear las fechas
+            const checkinFormatted = heroCheckinPicker.formatDate(checkinDate);
+            const checkoutFormatted = heroCheckoutPicker.formatDate(checkoutDate);
+
+            // Crear el mensaje de WhatsApp
+            const mensaje = `¡Hola! Me gustaría hacer una reserva en Terminal Suites:%0A%0A` +
                           `*Cantidad de personas:* ${personas}%0A` +
                           `*Check-in:* ${checkinFormatted}%0A` +
                           `*Check-out:* ${checkoutFormatted}%0A%0A` +
