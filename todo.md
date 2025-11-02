@@ -1,10 +1,11 @@
-- agregar imagenes que me pidio
-- video en el hero
+
 
 DONE:
 - seleccionar fotos para el carrusel
 - convertir a webp
 - carrusel para habitaciones, cocina y living?
+- agregar imagenes que me pidio
+- video en el hero
 
 Comunicar a clienta:
 - resumen del compact (se aplico el estilo visual de tu identidad de marca)
