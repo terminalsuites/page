@@ -1976,7 +1976,7 @@
                 <i class="fas fa-times"></i>
             </button>
             <div class="video-wrapper">
-                <iframe id="videoIframe" src="" title="Terminal suites" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe id="videoIframe" src="" title="Terminal suites" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen playsinline></iframe>
             </div>
         </div>
     </div>
@@ -2436,7 +2436,7 @@
         const videoPlayButton = document.getElementById('videoPlayButton');
         const videoModalClose = document.getElementById('videoModalClose');
         const videoIframe = document.getElementById('videoIframe');
-        const videoUrl = 'https://www.youtube.com/embed/bhPpSeTcHYI?autoplay=1';
+        const videoUrl = 'https://www.youtube.com/embed/bhPpSeTcHYI?autoplay=1&playsinline=1&rel=0';
 
         // Abrir modal de video
         videoPlayButton.addEventListener('click', () => {
