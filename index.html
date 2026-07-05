@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminal Suites - El Calafate, Patagonia Argentina</title>
 
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PW4X62N06Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PW4X62N06Y');
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2387,6 +2396,12 @@
             // Número de WhatsApp de Terminal Suites
             const numeroWhatsApp = '5492966569953'; // +54 2966 569953
 
+            // Eventos de conversión GA4
+            if (typeof gtag === 'function') {
+                gtag('event', 'intento_reserva', { form_id: 'reservationForm' });
+                gtag('event', 'clic_whatsapp', { origen: 'formulario_reserva' });
+            }
+
             // Abrir WhatsApp
             window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
             window.location.href = 'gracias.html';
@@ -2412,6 +2427,9 @@
                 alert('La fecha de check-out debe ser posterior a la fecha de check-in');
                 return;
             }
+
+            // Evento de conversión GA4 (intención de reserva desde el hero)
+            if (typeof gtag === 'function') gtag('event', 'intento_reserva', { form_id: 'heroBookingForm' });
 
             // Transferir los datos al formulario de contacto
             // Formatear las fechas

@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
 <title>¡Gracias! — Terminal Suites</title>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PW4X62N06Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PW4X62N06Y');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -78,12 +86,19 @@
     <h1>¡Gracias por tu reserva!</h1>
     <p>Abrimos WhatsApp para que confirmes tu consulta de disponibilidad. Si no se abrió, escribinos directamente y te respondemos a la brevedad.</p>
     <div class="btns">
-      <a class="btn btn-primario" href="https://wa.me/5492966569953" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp</a>
+      <a class="btn btn-primario" id="waFallback" href="https://wa.me/5492966569953" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp</a>
       <a class="btn btn-secundario" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al sitio</a>
     </div>
   </div>
   <footer>© <span id="anio"></span> Terminal Suites</footer>
-  <script>document.getElementById('anio').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('anio').textContent = new Date().getFullYear();
+    // Llegar a esta página confirma que el formulario se completó y WhatsApp se abrió
+    if (typeof gtag === 'function') gtag('event', 'reserva_confirmada');
+    document.getElementById('waFallback').addEventListener('click', function () {
+      if (typeof gtag === 'function') gtag('event', 'clic_whatsapp', { origen: 'pagina_gracias' });
+    });
+  </script>
   <!-- Cloudflare Web Analytics -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
     data-cf-beacon='{"token": "3f6774400b8d41d2aa315fa5cc2f9aea"}'></script>
