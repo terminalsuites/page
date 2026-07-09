@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reportes de Mantenimiento — Terminal Suites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<style>
+  :root{
+    --primary-dark:#1a2f1a; --secondary-dark:#2d422d;
+    --accent:#7ac142; --accent-highlight:#92d45e;
+    --text-primary:#f1f7eb; --text-secondary:#b8c5b8;
+    --accent-soft:rgba(122,193,66,.12);
+    --border-subtle:rgba(255,255,255,.08);
+    --border-hover:rgba(122,193,66,.45);
+    --shadow-glow:0 0 40px rgba(122,193,66,.15);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Space Grotesk',system-ui,sans-serif}
+  body{background:#10210f;color:var(--text-primary);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+
+  .container{max-width:860px;margin:40px auto;padding:0 20px}
+
+  .header{text-align:center;margin-bottom:50px;padding:40px 0;border-bottom:1px solid var(--border-subtle)}
+  .header h1{font-size:2.5rem;font-weight:700;color:var(--text-primary);margin-bottom:10px;letter-spacing:-.02em}
+  .header p{font-size:1.1rem;color:var(--text-secondary)}
+
+  .reports{display:grid;gap:20px}
+  .report-card{background:var(--secondary-dark);border:1px solid var(--border-subtle);border-radius:14px;padding:30px;transition:all .3s}
+  .report-card:hover{border-color:var(--accent);box-shadow:0 0 30px rgba(122,193,66,.2)}
+
+  .report-card h3{font-size:1.4rem;font-weight:600;color:var(--text-primary);margin-bottom:8px}
+  .report-date{font-size:.9rem;color:var(--accent);font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .report-date i{font-size:.8rem}
+
+  .report-desc{font-size:.95rem;color:var(--text-secondary);margin-bottom:16px;line-height:1.6}
+
+  .report-link{display:inline-block;padding:10px 20px;background:var(--accent);color:var(--primary-dark);text-decoration:none;border-radius:50px;font-weight:600;font-size:.9rem;transition:all .3s}
+  .report-link:hover{background:var(--accent-highlight);transform:translateY(-2px)}
+
+  .empty{text-align:center;padding:60px 20px;color:var(--text-secondary)}
+  .empty i{font-size:3rem;margin-bottom:20px;opacity:.5}
+
+  .footer{text-align:center;margin-top:50px;padding-top:30px;border-top:1px solid var(--border-subtle);color:var(--text-secondary);font-size:.85rem}
+  .footer a{color:var(--accent);text-decoration:none}
+
+  @media print{
+    body{background:#fff}
+    .report-card{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Reportes de Mantenimiento</h1>
+    <p>Terminal Suites — Plan de Mantenimiento Web</p>
+  </div>
+
+  <div class="reports" id="reportsList">
+    <!-- Los reportes se cargan automáticamente -->
+  </div>
+
+  <div class="footer">
+    <p>© <span id="year"></span> Terminal Suites</p>
+    <p style="margin-top:10px">
+      <i class="fa-solid fa-code"></i> Sitio web y reportes por
+      <a href="https://teocicciari.com.ar" target="_blank">Teo Cicciari</a>
+      <i class="fa-solid fa-laptop-code"></i>
+    </p>
+  </div>
+</div>
+
+<script>
+  // Lista de reportes disponibles (actualizar manualmente o generar dinámicamente)
+  const reports = [
+    {
+      id: 'setup-julio2026',
+      title: 'Mes 0 — Configuración Inicial',
+      date: 'julio 2026',
+      desc: 'Instalación de herramientas de medición (GA4, Cloudflare), meta tags para WhatsApp/redes y Schema.org para Google/IA.',
+      file: 'reporte-setup-julio2026.html',
+      status: 'setup'
+    },
+    // Próximos reportes irán aquí
+    // {
+    //   id: 'agosto2026',
+    //   title: 'Agosto 2026',
+    //   date: 'agosto 2026',
+    //   desc: 'Primer reporte completo con datos reales de visitas, fuentes de tráfico y conversiones.',
+    //   file: 'reporte-agosto2026.html'
+    // }
+  ];
+
+  const reportsList = document.getElementById('reportsList');
+
+  if (reports.length > 0) {
+    reports.forEach(report => {
+      const card = document.createElement('div');
+      card.className = 'report-card';
+      card.innerHTML = `
+        <h3>${report.title}</h3>
+        <div class="report-date">
+          <i class="fa-solid fa-calendar-alt"></i>
+          ${report.date}
+        </div>
+        <p class="report-desc">${report.desc}</p>
+        <a href="${report.file}" class="report-link">
+          <i class="fa-solid fa-file-pdf"></i> Ver reporte
+        </a>
+      `;
+      reportsList.appendChild(card);
+    });
+  } else {
+    reportsList.innerHTML = `
+      <div class="empty">
+        <i class="fa-solid fa-folder-open"></i>
+        <p>No hay reportes disponibles aún.</p>
+      </div>
+    `;
+  }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
