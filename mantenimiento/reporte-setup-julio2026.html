@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Setup · Plan de Mantenimiento Web — Terminal Suites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<style>
+  :root{
+    --primary-dark:#1a2f1a; --secondary-dark:#2d422d;
+    --accent:#7ac142; --accent-highlight:#92d45e;
+    --text-primary:#f1f7eb; --text-secondary:#b8c5b8;
+    --accent-soft:rgba(122,193,66,.12);
+    --border-subtle:rgba(255,255,255,.08);
+    --border-hover:rgba(122,193,66,.45);
+    --shadow-glow:0 0 40px rgba(122,193,66,.15);
+    --radius-sm:8px; --radius-md:14px; --radius-lg:20px; --radius-pill:50px;
+    --ease-out:cubic-bezier(.22,1,.36,1); --dur-base:.3s;
+    --success:#7ac142;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Space Grotesk',system-ui,sans-serif}
+  body{background:#10210f;color:var(--text-primary);line-height:1.65;font-weight:300;-webkit-font-smoothing:antialiased}
+  .doc{max-width:860px;margin:28px auto;background:var(--primary-dark);box-shadow:0 24px 60px rgba(0,0,0,.5);border-radius:var(--radius-lg);overflow:hidden}
+  .pad{padding:48px 56px}
+  h1,h2,h3,h4{letter-spacing:-.02em;line-height:1.15;font-weight:600}
+  p{margin-bottom:12px;font-size:1.02rem;color:var(--text-secondary)}
+  p strong,strong{font-weight:600;color:var(--text-primary)}
+  .small{font-size:.88rem;color:var(--text-secondary)}
+  .eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:.7rem;color:var(--accent);font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--accent)}
+
+  .hero{padding:60px 56px;background:radial-gradient(900px 500px at 80% -20%,rgba(122,193,66,.14),transparent 60%),var(--secondary-dark);border-bottom:1px solid var(--border-subtle)}
+  .hero .eyebrow{margin-bottom:18px}
+  .hero h1{font-size:2.9rem;font-weight:700;color:var(--text-primary);max-width:580px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero .sub{font-size:1.25rem;color:var(--text-secondary);margin-top:14px;max-width:540px;font-weight:300}
+  .hero .meta{margin-top:32px;display:flex;gap:40px;flex-wrap:wrap;font-size:.9rem}
+  .hero .meta .k{letter-spacing:.16em;text-transform:uppercase;font-size:.64rem;color:var(--accent);margin-bottom:4px}
+  .hero .meta div{color:var(--text-primary)}
+
+  h2{font-size:1.95rem;font-weight:600;margin-bottom:8px;color:var(--text-primary)}
+  .lead{font-size:1.25rem;color:var(--text-secondary);margin:6px 0 18px;max-width:600px;font-weight:300}
+  .divider{height:1px;background:var(--border-subtle)}
+
+  .checklist{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+  .checklist-item{display:flex;gap:14px;padding:16px;background:var(--secondary-dark);border:1px solid var(--border-subtle);border-radius:var(--radius-md)}
+  .checklist-item.done{border-color:var(--accent);background:rgba(122,193,66,.08)}
+  .checklist-item .icon{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--success);font-size:1rem;font-weight:700}
+  .checklist-item .icon i{font-size:.9rem}
+  .checklist-item .content h4{font-size:1.05rem;margin-bottom:3px;color:var(--text-primary)}
+  .checklist-item .content p{font-size:.92rem;margin:0;color:var(--text-secondary)}
+
+  .highlight-box{background:var(--secondary-dark);border-left:4px solid var(--accent);border-radius:var(--radius-md);padding:24px;margin-top:18px}
+  .highlight-box h3{font-size:1.15rem;margin-bottom:12px;color:var(--text-primary)}
+  .highlight-box p{font-size:.96rem;margin:6px 0}
+  .highlight-box strong{color:var(--accent-highlight)}
+
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  .stat-card{background:var(--secondary-dark);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:20px;text-align:center}
+  .stat-value{font-size:2rem;font-weight:700;color:var(--accent);margin-bottom:6px}
+  .stat-label{font-size:.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.08em}
+
+  .timeline{margin-top:18px}
+  .timeline-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border-subtle)}
+  .timeline-item:last-child{border-bottom:none}
+  .timeline-item .marker{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--primary-dark);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;margin-top:2px}
+  .timeline-item .content h4{font-size:1.02rem;margin-bottom:3px;color:var(--text-primary)}
+  .timeline-item .content p{font-size:.92rem;margin:0;color:var(--text-secondary)}
+
+  .box{background:var(--secondary-dark);border:1px dashed var(--border-subtle);border-radius:var(--radius-md);padding:26px 28px;margin-top:24px}
+  .box h3{font-size:1.2rem;margin-bottom:12px;color:var(--text-primary)}
+  .box ul{list-style:none}
+  .box li{padding:7px 0 7px 26px;position:relative;font-size:.92rem;color:var(--text-secondary)}
+  .box li i{position:absolute;left:0;top:10px;font-size:.78rem;color:var(--text-secondary)}
+
+  .foot{background:var(--secondary-dark);padding:44px 56px;border-top:1px solid var(--border-subtle)}
+  .foot h3{color:var(--text-primary);font-size:1.6rem;margin-bottom:14px}
+  .foot .row{display:flex;gap:12px;align-items:center;padding:7px 0;font-size:.96rem;color:var(--text-secondary)}
+  .foot .row i{color:var(--accent);width:20px}
+  .foot a{color:var(--accent);text-decoration:none}
+
+  @media print{
+    body{background:#fff}
+    .doc{box-shadow:none;margin:0;max-width:none;border-radius:0}
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    .pad,.hero,.foot{page-break-inside:avoid}
+  }
+  @media(max-width:680px){
+    .pad,.hero,.foot{padding:32px 26px}
+    .stats{grid-template-columns:1fr}
+    .hero h1{font-size:2.2rem}
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <header class="hero">
+    <div class="eyebrow">Reporte de Setup</div>
+    <h1>Mes <em>0</em> — Configuración inicial</h1>
+    <div class="sub">Ya instalé todas las herramientas de medición. A principios del próximo mes te presento el primer reporte con datos reales.</div>
+    <div class="meta">
+      <div><div class="k">Para</div>Pau — Terminal Suites</div>
+      <div><div class="k">De</div>Teo Cicciari · Desarrollo web</div>
+      <div><div class="k">Período</div><span id="monthYear"></span></div>
+    </div>
+  </header>
+
+  <section class="pad">
+    <div class="eyebrow">Este mes hicimos</div>
+    <h2>Todo lo que faltaba está andando</h2>
+    <p class="lead">Ya instalé las 4 cosas que te frenaban. Ahora tu sitio está listo para crecer con datos.</p>
+
+    <div class="checklist">
+      <div class="checklist-item done">
+        <div class="icon"><i class="fa-solid fa-check"></i></div>
+        <div class="content">
+          <h4>✓ Instalé Google Analytics 4 y Cloudflare Analytics</h4>
+          <p>Ahora tu sitio mide todo: visitas, usuarios únicos, de dónde llegan, qué páginas ven, cuántos usan el formulario de reserva. A fin de mes tendrás los primeros datos.</p>
+        </div>
+      </div>
+
+      <div class="checklist-item done">
+        <div class="icon"><i class="fa-solid fa-check"></i></div>
+        <div class="content">
+          <h4>✓ El pie de página se actualiza automático</h4>
+          <p>El año ahora es dinámico con JavaScript. Nunca más vas a abrir el sitio en 2027 y que diga "© 2026". Está hecho para durar.</p>
+        </div>
+      </div>
+
+      <div class="checklist-item done">
+        <div class="icon"><i class="fa-solid fa-check"></i></div>
+        <div class="content">
+          <h4>✓ Agregué vista previa para WhatsApp y redes sociales</h4>
+          <p>Ahora cuando compartís el link por WhatsApp aparece con foto, nombre y descripción. Con los meta tags Open Graph correctos, se ve profesional en cualquier plataforma.</p>
+        </div>
+      </div>
+
+      <div class="checklist-item done">
+        <div class="icon"><i class="fa-solid fa-check"></i></div>
+        <div class="content">
+          <h4>✓ Google y ChatGPT ahora entienden que sos un alojamiento</h4>
+          <p>Instalé Schema.org JSON-LD tipo Hotel. Ahora Google sabe tu ubicación exacta, que tenés 8 departamentos, tu teléfono, email, amenidades, checkin/checkout. Aparecerás en búsquedas de hoteles y en asistentes de IA como ChatGPT.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3><i class="fa-solid fa-rocket" style="color:var(--accent)"></i> Qué significa esto</h3>
+      <p>Por primera vez vas a saber exactamente cuánta gente entra, de dónde llega y cuántos terminan reservando. Ya no es a ciegas. Además, tu sitio ahora es <strong>visible en Google Hoteles</strong>, en <strong>ChatGPT</strong> y en los <strong>asistentes con IA</strong> que usan millones de viajeros.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="pad">
+    <div class="eyebrow">Estado del sitio</div>
+    <h2>Todo funcionando al 100%</h2>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-value">4/4</div>
+        <div class="stat-label">Herramientas instaladas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">✓</div>
+        <div class="stat-label">Sitio funcionando</div>
+      </div>
+    </div>
+
+    <div class="box" style="margin-top:24px">
+      <h3><i class="fa-solid fa-gear" style="color:var(--text-secondary)"></i> Herramientas de medición activas</h3>
+      <ul>
+        <li><i class="fa-solid fa-check"></i>Google Analytics 4 — rastreando visitantes y conversiones</li>
+        <li><i class="fa-solid fa-check"></i>Cloudflare Web Analytics — medición de rendimiento</li>
+        <li><i class="fa-solid fa-check"></i>Eventos de conversión — "intento_reserva", "clic_whatsapp", "reserva_confirmada"</li>
+        <li><i class="fa-solid fa-check"></i>Meta tags Open Graph + Schema.org — visibilidad en redes y buscadores</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="pad">
+    <div class="eyebrow">Próximos pasos</div>
+    <h2>Así es el ritmo de aquí en adelante</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="marker">1</div>
+        <div class="content">
+          <h4>Este mes (julio): Recolectar datos</h4>
+          <p>Mientras tus huéspedes entran al sitio y reservan, GA4 y Cloudflare acumulan información sobre el tráfico, fuentes, comportamiento de usuarios.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="marker">2</div>
+        <div class="content">
+          <h4>A principios de agosto: Primer reporte completo</h4>
+          <p>Recibirás un reporte detallado con: cuánta gente entró, de dónde (Google, Instagram, directo), cuántos consultaron o reservaron, qué páginas funcionan mejor.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="marker">3</div>
+        <div class="content">
+          <h4>Cada mes: Reporte + Mantenimiento</h4>
+          <p>Mensualmente vas a tener: el análisis de visitas, cambios chicos que hagas falta (precios, fotos, textos), asegurar que nada se rompa, recomendaciones basadas en los datos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3><i class="fa-solid fa-calendar-check" style="color:var(--accent)"></i> Cronograma</h3>
+      <p><strong>Dentro de una semana:</strong> Confirmo que GA4 está rastreando correctamente.</p>
+      <p><strong>Principios de agosto:</strong> Te llega el primer reporte con datos reales de julio.</p>
+      <p><strong>A partir de entonces:</strong> Reporte + mantenimiento mensual, siempre el mismo día.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="pad">
+    <div class="eyebrow">Preguntas que vas a poder responder en 30 días</div>
+    <h2>Con el primer reporte sabrás</h2>
+    <p class="lead">Ya no serán adivinanzas. Números reales de tu sitio.</p>
+    <ul style="list-style:none;margin-top:18px">
+      <li style="padding:12px 0 12px 26px;position:relative;border-bottom:1px solid var(--border-subtle)"><i class="fa-solid fa-arrow-right" style="position:absolute;left:0;top:15px;font-size:.8rem;color:var(--accent)"></i> ¿Cuánta gente entró al sitio?</li>
+      <li style="padding:12px 0 12px 26px;position:relative;border-bottom:1px solid var(--border-subtle)"><i class="fa-solid fa-arrow-right" style="position:absolute;left:0;top:15px;font-size:.8rem;color:var(--accent)"></i> ¿De dónde vinieron? (Google, Instagram, directo, otro)</li>
+      <li style="padding:12px 0 12px 26px;position:relative;border-bottom:1px solid var(--border-subtle)"><i class="fa-solid fa-arrow-right" style="position:absolute;left:0;top:15px;font-size:.8rem;color:var(--accent)"></i> ¿Qué páginas vieron más?</li>
+      <li style="padding:12px 0 12px 26px;position:relative;border-bottom:1px solid var(--border-subtle)"><i class="fa-solid fa-arrow-right" style="position:absolute;left:0;top:15px;font-size:.8rem;color:var(--accent)"></i> ¿Cuántos completaron el formulario de reserva?</li>
+      <li style="padding:12px 0 12px 26px;position:relative"><i class="fa-solid fa-arrow-right" style="position:absolute;left:0;top:15px;font-size:.8rem;color:var(--accent)"></i> ¿Cuál es la tasa de conversión? (si entran 100, cuántos se animan a consultar/reservar)</li>
+    </ul>
+  </section>
+
+  <footer class="foot">
+    <h3>Listo para el siguiente paso</h3>
+    <p class="small" style="margin-bottom:14px">Todo está configurado y midiendo. El mes que viene te mando el reporte completo con datos reales. Cualquier duda, escribime.</p>
+    <div class="row"><i class="fa-solid fa-user"></i> Teo Cicciari — Desarrollo web</div>
+    <div class="row"><i class="fa-brands fa-whatsapp"></i> +54 9 2944 81-2580</div>
+    <div class="row"><i class="fa-solid fa-envelope"></i> teocicciari@gmail.com</div>
+    <div class="row" style="margin-top:14px"><i class="fa-solid fa-calendar"></i> <span id="currentDate"></span></div>
+  </footer>
+
+</div>
+
+<script>
+  const today = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = today.toLocaleDateString('es-AR', options);
+  document.getElementById('currentDate').textContent = formattedDate;
+
+  const monthYear = today.toLocaleDateString('es-AR', { year: 'numeric', month: 'long' });
+  document.getElementById('monthYear').textContent = monthYear;
+</script>
+
+</body>
+</html>
