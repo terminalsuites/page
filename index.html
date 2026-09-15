@@ -33,6 +33,9 @@
       gtag('config', 'G-PW4X62N06Y');
     </script>
 
+    <link rel="preload" as="image" href="img/hero-glaciar.webp" media="(min-width: 769px)" fetchpriority="high">
+    <link rel="preload" as="image" href="img/hero-glaciar-vert.webp" media="(max-width: 768px)" fetchpriority="high">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -215,7 +218,7 @@
             left: -5%;
             width: 110%;
             height: 110%;
-            background: url('img/background2.webp') no-repeat center center;
+            background: url('img/hero-glaciar.webp') no-repeat center center;
             background-size: cover;
             animation: kenBurns 20s ease-in-out infinite alternate;
             z-index: -2;
@@ -954,16 +957,35 @@
         /* Actividades */
         .activities-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
         .activity-card {
             text-align: center;
-            padding: 2rem;
-            background: #f4ede3;
+            background: #ffffff;
             border-radius: 0 25px 0 0;
+            overflow: hidden;
+            box-shadow: 0 2px 14px rgba(40, 59, 79, 0.08);
             transition: all 0.3s;
+        }
+
+        /* La foto encabeza la card. El ícono queda abajo como marcador
+           chico del tipo de plan, ya no como protagonista. */
+        .activity-photo {
+            aspect-ratio: 3 / 2;
+            overflow: hidden;
+        }
+
+        .activity-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .activity-body {
+            padding: 1.75rem 1.5rem 2rem;
         }
 
         .activity-card h3 {
@@ -977,11 +999,176 @@
             background: #283b4f;
             color: white;
             transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(40, 59, 79, 0.22);
         }
 
         .activity-icon {
-            font-size: 3rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+            color: #bab3ae;
+        }
+
+        /* Traslados privados — portada de la sección Actividades.
+           Es lo único de esta sección que vende Terminal Suites, y es cómo se
+           llega a todo lo que viene abajo: por eso encabeza en vez de ser
+           una card más de la grilla. */
+        .transfers {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            background: #283b4f;
+            border-radius: 0 80px 0 0;
+            overflow: hidden;
+            margin-bottom: 3.5rem;
+        }
+
+        /* Dos vehiculos apilados: el auto y la combi, que es la flota real.
+           El gap deja pasar el azul del bloque como hairline entre las dos. */
+        .transfers-photos {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            min-height: 460px;
+        }
+
+        .transfers-photos img {
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            object-fit: cover;
+            display: block;
+        }
+
+        .transfers-body {
+            padding: 3rem 3rem 2.5rem;
+            color: #f4ede3;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .transfers-eyebrow {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #bab3ae;
+            margin-bottom: 0.9rem;
+        }
+
+        .transfers-body h3 {
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1.05;
             margin-bottom: 1rem;
+        }
+
+        .transfers-body > p:not(.transfers-eyebrow) {
+            font-size: 1rem;
+            line-height: 1.65;
+            color: #d8d2ca;
+            margin-bottom: 1.8rem;
+        }
+
+        /* Tabla de salidas: cada destino es uno de los planes de abajo.
+           Las distancias salen desde la puerta del aparthotel. */
+        .transfers-routes {
+            list-style: none;
+            border-top: 1px solid rgba(244, 237, 227, 0.18);
+            margin: 0 0 2rem;
+            padding: 0;
+        }
+
+        .transfers-routes li {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid rgba(244, 237, 227, 0.18);
+        }
+
+        .transfers-routes .dest {
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-size: 1.02rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .transfers-routes .dist {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: #bab3ae;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        .transfers-cta {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: auto;
+            padding: 0.95rem 2rem;
+            background: #f4ede3;
+            color: #283b4f;
+            text-decoration: none;
+            border-radius: 30px;
+            font-family: 'Houschka Rounded', 'Bebas Neue', 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .transfers-cta:hover,
+        .transfers-cta:focus-visible {
+            background: #ffffff;
+            transform: translateX(4px);
+        }
+
+        .transfers-cta:focus-visible {
+            outline: 3px solid #f4ede3;
+            outline-offset: 3px;
+        }
+
+        /* Bisagra: cierra el "cómo llegás" y abre el "qué hay para hacer". */
+        .activities-hinge {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #283b4f;
+        }
+
+        .activities-hinge::before,
+        .activities-hinge::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #bab3ae;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .transfers-cta {
+                transition: none;
+            }
+
+            .transfers-cta:hover,
+            .transfers-cta:focus-visible {
+                transform: none;
+            }
         }
 
         /* Contacto */
@@ -1507,6 +1694,31 @@
                 height: 50px;
             }
 
+            .transfers {
+                grid-template-columns: 1fr;
+                border-radius: 0 40px 0 0;
+            }
+
+            /* En vertical las dos apiladas quedan achatadas: van lado a lado. */
+            .transfers-photos {
+                grid-template-rows: none;
+                grid-template-columns: 1fr 1fr;
+                min-height: 200px;
+            }
+
+            .transfers-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .transfers-body h3 {
+                font-size: 1.6rem;
+            }
+
+            .transfers-cta {
+                align-self: stretch;
+                justify-content: center;
+            }
+
             .section-title {
                 font-size: 2rem;
             }
@@ -1609,6 +1821,7 @@
             /* Reducir el efecto Ken Burns en móviles para mejor rendimiento */
             .hero::before {
                 animation: kenBurnsMobile 15s ease-in-out infinite alternate;
+                background-image: url('img/hero-glaciar-vert.webp');
             }
 
             @keyframes kenBurnsMobile {
@@ -1929,41 +2142,95 @@
             El Calafate es la puerta de entrada al impresionante Glaciar Perito Moreno
         </p>
         
+        <div class="transfers">
+            <div class="transfers-photos">
+                <img src="img/traslado-ruta.webp" alt="Auto de traslado privado en la ruta al atardecer, con el cordón del Fitz Roy de fondo" loading="lazy" width="900" height="675">
+                <img src="img/traslado-van.webp" alt="Combi de traslado privado estacionada frente al Fitz Roy al atardecer" loading="lazy" width="900" height="675">
+            </div>
+            <div class="transfers-body">
+                <p class="transfers-eyebrow">Servicio propio</p>
+                <h3>Traslados privados</h3>
+                <p>Coordinamos el chofer desde la puerta del aparthotel hasta donde vayas. Sin traslados compartidos ni esperas: salís a tu horario y volvés cuando terminás.</p>
+                <ul class="transfers-routes">
+                    <li><span class="dest">Aeropuerto</span> <span class="dist">23 km &middot; 25 min</span></li>
+                    <li><span class="dest">Glaciar Perito Moreno</span> <span class="dist">78 km &middot; 1 h 20</span></li>
+                    <li><span class="dest">El Chaltén</span> <span class="dist">213 km &middot; 3 h</span></li>
+                    <li><span class="dest">Estancias y Lago Roca</span> <span class="dist">50 km &middot; 1 h</span></li>
+                </ul>
+                <a class="transfers-cta" href="https://wa.me/5492966569953?text=Hola%2C%20quiero%20consultar%20por%20un%20traslado%20privado" target="_blank" rel="noopener"
+                   onclick="if (typeof gtag === 'function') { gtag('event', 'clic_whatsapp', { origen: 'traslados' }); }">
+                    <i class="fa-brands fa-whatsapp"></i> Consultar traslado
+                </a>
+            </div>
+        </div>
+
+        <p class="activities-hinge">Y una vez que llegás</p>
+
         <div class="activities-grid">
             <div class="activity-card">
-                <div class="activity-icon"><i class="fas fa-mountain"></i></div>
-                <h3>Parque Nacional Los Glaciares</h3>
-                <p>Explora el majestuoso Glaciar Perito Moreno y sus imponentes paredes de hielo</p>
+                <div class="activity-photo">
+                    <img src="img/glaciar.webp" alt="Frente del Glaciar Perito Moreno sobre el Lago Argentino, con el bosque en otoño" loading="lazy" width="900" height="506">
+                </div>
+                <div class="activity-body">
+                    <div class="activity-icon"><i class="fas fa-mountain"></i></div>
+                    <h3>Parque Nacional Los Glaciares</h3>
+                    <p>Explora el majestuoso Glaciar Perito Moreno y sus imponentes paredes de hielo</p>
+                </div>
             </div>
 
             <div class="activity-card">
-                <div class="activity-icon"><i class="fas fa-ship"></i></div>
-                <h3>Navegaciones</h3>
-                <p>Paseos en barco que te acercan a las paredes de hielo en un espectáculo inolvidable</p>
+                <div class="activity-photo">
+                    <img src="img/navegacion.webp" alt="Embarcación de excursión navegando entre témpanos sobre el agua turquesa del lago" loading="lazy" width="900" height="599">
+                </div>
+                <div class="activity-body">
+                    <div class="activity-icon"><i class="fas fa-ship"></i></div>
+                    <h3>Navegaciones</h3>
+                    <p>Paseos en barco que te acercan a las paredes de hielo en un espectáculo inolvidable</p>
+                </div>
             </div>
 
             <div class="activity-card">
-                <div class="activity-icon"><i class="fas fa-hiking"></i></div>
-                <h3>Trekking sobre Hielo</h3>
-                <p>Caminatas sobre el glaciar para los más aventureros</p>
+                <div class="activity-photo">
+                    <img src="img/escalada.webp" alt="Fila de caminantes sobre el hielo del glaciar durante el minitrekking" loading="lazy" width="900" height="600">
+                </div>
+                <div class="activity-body">
+                    <div class="activity-icon"><i class="fas fa-hiking"></i></div>
+                    <h3>Trekking sobre Hielo</h3>
+                    <p>Caminatas sobre el glaciar para los más aventureros</p>
+                </div>
             </div>
 
             <div class="activity-card">
-                <div class="activity-icon"><i class="fas fa-water"></i></div>
-                <h3>Kayak en Lago Argentino</h3>
-                <p>Excursiones en kayak y visitas a glaciares como Upsala y Spegazzini</p>
+                <div class="activity-photo">
+                    <img src="img/kayak.webp" alt="Persona remando en kayak sobre el agua turquesa de un lago glaciario" loading="lazy" width="900" height="600">
+                </div>
+                <div class="activity-body">
+                    <div class="activity-icon"><i class="fas fa-water"></i></div>
+                    <h3>Kayak en Lago Argentino</h3>
+                    <p>Excursiones en kayak y visitas a glaciares como Upsala y Spegazzini</p>
+                </div>
             </div>
 
             <div class="activity-card">
-                <div class="activity-icon"><i class="fas fa-horse"></i></div>
-                <h3>Estancias Patagónicas</h3>
-                <p>Cabalgatas y visitas a estancias tradicionales para sumergirse en la vida rural</p>
+                <div class="activity-photo">
+                    <img src="img/cabalgata.webp" alt="Paisano a caballo con poncho y boina, acompañado por sus perros, en un camino nevado de la cordillera" loading="lazy" width="900" height="600">
+                </div>
+                <div class="activity-body">
+                    <div class="activity-icon"><i class="fas fa-horse"></i></div>
+                    <h3>Estancias Patagónicas</h3>
+                    <p>Cabalgatas y visitas a estancias tradicionales para sumergirse en la vida rural</p>
+                </div>
             </div>
 
             <div class="activity-card">
-                <div class="activity-icon"><i class="fas fa-utensils"></i></div>
-                <h3>Gastronomía Local</h3>
-                <p>Descubre los sabores auténticos de la Patagonia con exquisita cocina local</p>
+                <div class="activity-photo">
+                    <img src="img/gastronomia.webp" alt="Asador cortando cordero y costillares colgados en la parrilla" loading="lazy" width="900" height="600">
+                </div>
+                <div class="activity-body">
+                    <div class="activity-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Gastronomía Local</h3>
+                    <p>Descubre los sabores auténticos de la Patagonia con exquisita cocina local</p>
+                </div>
             </div>
         </div>
     </section>
