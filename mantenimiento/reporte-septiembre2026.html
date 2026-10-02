@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte Septiembre 2026 — Terminal Suites</title>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     PLANTILLA MÁQUINA · La rellena generar-reporte.js — no editarla a mano.
+     Derivada de jefa/data/plantillas/reporte-mensual.html (marca Teo).
+     ═══════════════════════════════════════════════════════════════════════ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<style>
+  :root{
+    --primary-dark:#1a2f1a; --secondary-dark:#2d422d;
+    --accent:#7ac142; --accent-highlight:#92d45e;
+    --text-primary:#f1f7eb; --text-secondary:#b8c5b8;
+    --accent-soft:rgba(122,193,66,.12);
+    --border-subtle:rgba(255,255,255,.08);
+    --border-hover:rgba(122,193,66,.45);
+    --shadow-glow:0 0 40px rgba(122,193,66,.15);
+    --radius-sm:8px; --radius-md:14px; --radius-lg:20px;
+    --up:#7ac142; --down:#e0685e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Space Grotesk',system-ui,sans-serif}
+  body{background:#10210f;color:var(--text-primary);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+  .doc{max-width:820px;margin:28px auto;background:var(--primary-dark);box-shadow:0 24px 60px rgba(0,0,0,.5);border-radius:var(--radius-lg);overflow:hidden}
+  .pad{padding:40px 48px}
+  h1,h2,h3,h4{letter-spacing:-.02em;line-height:1.15;font-weight:600}
+
+  .head{padding:36px 48px 30px;background:radial-gradient(800px 400px at 85% -30%,rgba(122,193,66,.16),transparent 60%),var(--secondary-dark);border-bottom:1px solid var(--border-subtle)}
+  .head .eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:.7rem;color:var(--accent);font-weight:500;margin-bottom:10px}
+  .head h1{font-size:2rem;color:var(--text-primary)}
+  .head .who{color:var(--text-secondary);margin-top:6px;font-size:1.02rem}
+
+  .section-t{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--accent);font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .section-t::before{content:"";width:24px;height:1px;background:var(--accent)}
+  .divider{height:1px;background:var(--border-subtle)}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .kpi{background:var(--secondary-dark);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:20px}
+  .kpi .lab{font-size:.74rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.08em}
+  .kpi .val{font-size:2rem;font-weight:700;color:var(--text-primary);margin-top:6px;letter-spacing:-.02em}
+  .kpi .delta{font-size:.78rem;margin-top:4px;display:flex;align-items:flex-start;gap:6px;color:var(--text-secondary);line-height:1.35}
+  .kpi .delta i{flex:0 0 auto;font-size:.85em;margin-top:.2em}
+  .kpi .delta.up{color:var(--up)} .kpi .delta.down{color:var(--down)}
+  .kpi .delta.new{color:var(--text-secondary);opacity:.85}
+  .kpi.hl{border-color:var(--border-hover);box-shadow:var(--shadow-glow)}
+  .kpi.hl .val{color:var(--accent)}
+
+  .bars{display:flex;flex-direction:column;gap:14px}
+  .bar-row{display:grid;grid-template-columns:130px 1fr 54px;align-items:center;gap:14px;font-size:.92rem}
+  .bar-row .name{color:var(--text-primary);display:flex;align-items:center;gap:8px}
+  .bar-row .name i{color:var(--accent);width:18px;text-align:center}
+  .track{height:12px;background:var(--secondary-dark);border-radius:20px;overflow:hidden}
+  .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-highlight));border-radius:20px}
+  .bar-row .pct{text-align:right;color:var(--text-secondary)}
+
+  .rows{list-style:none}
+  .rows li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border-subtle);font-size:.94rem;color:var(--text-secondary)}
+  .rows li:last-child{border-bottom:none}
+  .rows li b{color:var(--text-primary);font-weight:500}
+
+  .hechos{list-style:none}
+  .hechos li{display:flex;gap:11px;padding:9px 0;font-size:.94rem;color:var(--text-secondary);align-items:flex-start}
+  .hechos li i{color:var(--accent);margin-top:4px;flex-shrink:0}
+  .aparte{margin-top:18px;background:var(--secondary-dark);border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:18px 22px}
+  .aparte h4{color:var(--text-primary);font-size:1rem;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+  .aparte h4 i{color:var(--accent)}
+  .aparte p{color:var(--text-secondary);font-size:.92rem;margin:0}
+
+  .reco{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:22px 26px}
+  .reco h3{color:var(--text-primary);font-size:1.15rem;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+  .reco h3 i{color:var(--accent)}
+  .reco p{color:var(--text-secondary);font-size:.96rem;margin:0}
+
+  .pasos{margin:14px 0 0;padding-left:18px;color:var(--text-secondary);font-size:.93rem}
+  .pasos li{padding:5px 0;line-height:1.55}
+  .pasos li::marker{color:var(--accent);font-weight:600}
+
+  .foot{background:var(--secondary-dark);padding:28px 48px;border-top:1px solid var(--border-subtle);font-size:.85rem;color:var(--text-secondary);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .foot i{color:var(--accent)}
+
+  @media print{
+    body{background:#fff}
+    .doc{box-shadow:none;margin:0;max-width:none;border-radius:0}
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    section{page-break-inside:avoid}
+  }
+  @media(max-width:680px){
+    .pad,.head,.foot{padding:28px 24px}
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .bar-row{grid-template-columns:96px 1fr 44px}
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <header class="head">
+    <div class="eyebrow">Reporte mensual de tu sitio</div>
+    <h1>Septiembre 2026</h1>
+    <div class="who">Terminal Suites · terminalsuites.com.ar</div>
+  </header>
+
+  <!-- RESUMEN -->
+  <section class="pad">
+    <div class="section-t">El mes de un vistazo</div>
+    <div class="kpis">
+      <div class="kpi">
+        <div class="lab">Visitas</div>
+        <div class="val">75</div>
+        <div class="delta down"><i class="fa-solid fa-arrow-down"></i> 84% vs Agosto 2026</div>
+      </div>
+      <div class="kpi">
+        <div class="lab">Personas distintas</div>
+        <div class="val">48</div>
+        <div class="delta down"><i class="fa-solid fa-arrow-down"></i> 89% vs Agosto 2026</div>
+      </div>
+      <div class="kpi hl">
+        <div class="lab">Consultas de reserva</div>
+        <div class="val">5</div>
+        <div class="delta down"><i class="fa-solid fa-arrow-down"></i> 38% vs Agosto 2026</div>
+      </div>
+      <div class="kpi">
+        <div class="lab">Convierten en consulta</div>
+        <div class="val">6.7%</div>
+        <div class="delta up"><i class="fa-solid fa-arrow-up"></i> 4.9 pts</div>
+      </div>
+    </div>
+    <p style="color:var(--text-secondary);font-size:.92rem;margin-top:18px">Septiembre fue el mes que confirmó algo importante. Se cortó la publicidad y las visitas cayeron de 462 a 75 — pero las consultas apenas bajaron de 8 a 5. Dicho de otro modo: perdiste el 84% del tráfico y casi nada de las consultas, porque ese tráfico no estaba consultando. De cada 100 personas que entran ahora, 7 te escriben; en agosto eran menos de 2.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FUENTES -->
+  <section class="pad">
+    <div class="section-t">De dónde llegó la gente</div>
+    <div class="bars">
+      <div class="bar-row">
+        <div class="name"><i class="fa-solid fa-globe"></i> Organic Search</div>
+        <div class="track"><div class="fill" style="width:35%"></div></div>
+        <div class="pct">35%</div>
+      </div>
+      <div class="bar-row">
+        <div class="name"><i class="fa-solid fa-globe"></i> Direct</div>
+        <div class="track"><div class="fill" style="width:28%"></div></div>
+        <div class="pct">28%</div>
+      </div>
+      <div class="bar-row">
+        <div class="name"><i class="fa-solid fa-globe"></i> Organic Social</div>
+        <div class="track"><div class="fill" style="width:24%"></div></div>
+        <div class="pct">24%</div>
+      </div>
+      <div class="bar-row">
+        <div class="name"><i class="fa-solid fa-globe"></i> Referral</div>
+        <div class="track"><div class="fill" style="width:8%"></div></div>
+        <div class="pct">8%</div>
+      </div>
+      <div class="bar-row">
+        <div class="name"><i class="fa-solid fa-globe"></i> Unassigned</div>
+        <div class="track"><div class="fill" style="width:4%"></div></div>
+        <div class="pct">4%</div>
+      </div>
+      <div class="bar-row">
+        <div class="name"><i class="fa-solid fa-globe"></i> AI Assistant</div>
+        <div class="track"><div class="fill" style="width:1%"></div></div>
+        <div class="pct">1%</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PAGINAS / EMBUDO -->
+  <section class="pad">
+    <div class="section-t">Cómo se convierten tus visitas</div>
+    <div class="bars">
+      <div class="bar-row">
+        <div class="name"><i class="fa-solid fa-eye"></i> Visitas al sitio</div>
+        <div class="track"><div class="fill" style="width:100%"></div></div>
+        <div class="pct">75</div>
+      </div>
+      <div class="bar-row">
+        <div class="name"><i class="fa-solid fa-clipboard-list"></i> Enviaron el formulario de reserva</div>
+        <div class="track"><div class="fill" style="width:7%"></div></div>
+        <div class="pct">5</div>
+      </div>
+      <div class="bar-row">
+        <div class="name"><i class="fa-brands fa-whatsapp"></i> Abrieron WhatsApp</div>
+        <div class="track"><div class="fill" style="width:8%"></div></div>
+        <div class="pct">6</div>
+      </div>
+      <div class="bar-row">
+        <div class="name"><i class="fa-solid fa-flag-checkered"></i> Llegaron a la pantalla final</div>
+        <div class="track"><div class="fill" style="width:0%"></div></div>
+        <div class="pct">0</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TRABAJO DEL MES (opcional) + RECOMENDACION -->
+  <section class="pad">
+    <div class="section-t">Lo que hice este mes</div>
+    <ul class="hechos">
+      <li><i class="fa-solid fa-check"></i> <span>Arreglé el circuito de reserva: en mobile el formulario abría WhatsApp pero la pantalla de confirmación no llegaba a cargar, así que no sabíamos cuántas consultas se completaban de verdad. Ahora sí, y si WhatsApp no abre, la persona tiene un botón para reintentar.</span></li>
+      <li><i class="fa-solid fa-check"></i> <span>Tu página no tenía título principal. Es lo primero que lee Google para entender de qué se trata el sitio, y no existía. Ya está puesto, con la cercanía a la terminal adentro.</span></li>
+      <li><i class="fa-solid fa-check"></i> <span>Acorté la descripción que aparece debajo del título en Google: tenía 238 caracteres y se cortaba en 155, así que un tercio no se veía nunca. Ahora entra entera y arranca por lo que te diferencia.</span></li>
+      <li><i class="fa-solid fa-check"></i> <span>Corregí la ficha de alojamiento: las seis comodidades (WiFi, calefacción, estacionamiento, seguridad 24/7, conserjería y box de bienvenida) estaban cargadas con un formato que Google no interpreta. Estaban ahí sin que nadie las leyera.</span></li>
+      <li><i class="fa-solid fa-check"></i> <span>Unifiqué la distancia al Glaciar Perito Moreno en 77 km, que es lo que marca Google Maps. La página decía 70 en un lugar y 78 en otro.</span></li>
+      <li><i class="fa-solid fa-check"></i> <span>Limpié el enlace a Airbnb, que arrastraba fechas de noviembre de 2025.</span></li>
+    </ul>
+    <div class="aparte">
+      <h4><i class="fa-solid fa-receipt"></i> Renovación del dominio — $8.500</h4>
+      <p>Renové terminalsuites.com.ar por un año más para que el sitio no se caiga. Este ítem va por separado: tu plan cubre el mantenimiento, no el dominio. Te lo paso con el próximo cobro. (El plan Plus lo incluye, por si en algún momento te resulta más cómodo tener todo junto.)</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="pad">
+    <div class="section-t">Mi recomendación del mes</div>
+    <div class="reco">
+      <h3><i class="fa-brands fa-youtube"></i> Subí el video a tu propio canal de YouTube</h3>
+      <p>El video del complejo —el que se reproduce cuando alguien toca el play en la portada— está subido a mi canal, no al tuyo. Para el sitio funciona igual, pero no te construye nada: si alguien busca «departamentos El Calafate» en YouTube, ese video no juega a tu favor. Y hoy no aparece en ninguna búsqueda, ni siquiera junto a tu propio nombre. Abrir el canal es gratis y te sirve la misma casilla que ya usás. Cuando lo subas, yo cambio el del sitio por el tuyo y a partir de ahí todas las reproducciones son tuyas. Así conviene publicarlo:</p>
+      <ol class="pasos">
+        <li>Creá el canal con tu correo de Terminal Suites, y ponele el nombre del complejo, no tu nombre personal.</li>
+        <li>Subilo como Público. Si queda en «No listado» no va a aparecer nunca en una búsqueda: es el error más común y el más fácil de pasar por alto.</li>
+        <li>El título tiene que decir lo que la gente escribe al buscar: «Departamentos en El Calafate a 100 m de la terminal de buses — Terminal Suites». No el nombre del archivo ni «video final».</li>
+        <li>En la descripción, poné el link a terminalsuites.com.ar en el primer renglón y debajo dónde queda y qué incluye. Esa primera línea es lo único que se ve sin desplegar.</li>
+        <li>Etiquetá la ubicación en El Calafate, dentro de «Mostrar más» al subirlo. Ayuda a que aparezca en búsquedas de la zona.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div><i class="fa-solid fa-user"></i> Preparado por Teo Cicciari · Desarrollo web</div>
+    <div><i class="fa-solid fa-rotate"></i> Próximo reporte: Octubre 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>
