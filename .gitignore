@@ -12,3 +12,12 @@ PROYECTO.md
 # Material interno de sesión
 compact.txt
 repositorio-git
+
+# La carpeta mantenimiento/ se publica en terminalsuites.com.ar/mantenimiento/,
+# asi que TODO lo que este ahi queda accesible para cualquiera con el link.
+# Estos son internos y NO deben publicarse:
+mantenimiento/INSTRUCCIONES.md
+mantenimiento/PENDIENTES.md
+mantenimiento/propuesta-mantenimiento-dark.html
+mantenimiento/reporte-muestra.html
+mantenimiento/Propuesta*.pdf
